@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useCallback, useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import { List, X } from "@phosphor-icons/react";
 import { AnimatePresence, LayoutGroup, motion } from "framer-motion";
 
@@ -32,6 +33,9 @@ const springTransition = {
   damping: 40,
   mass: 0.8,
 };
+
+const mobileMenuIconButtonClassName =
+  "relative inline-flex size-11 shrink-0 items-center justify-center rounded-full border border-slate-200 bg-white p-2.5 text-slate-800 transition-colors duration-200 active:bg-slate-50";
 
 function NavLink({
   href,
@@ -80,51 +84,44 @@ function MobileNavLink({
   label,
   active,
   onNavigate,
-  index,
 }: {
   href: string;
   label: string;
   active: boolean;
   onNavigate: () => void;
-  index: number;
 }) {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 8 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{
-        delay: 0.04 * index,
-        duration: 0.35,
-        ease: [0.25, 1, 0.5, 1],
-      }}
+    <Link
+      href={href}
+      onClick={onNavigate}
+      className={`flex items-center gap-3 rounded-xl px-4 py-3.5 font-sans text-[0.7rem] font-bold tracking-[0.18em] uppercase transition-colors duration-200 ${
+        active
+          ? "bg-blue-800/[0.06] text-blue-800"
+          : "text-slate-600 active:bg-slate-100"
+      }`}
     >
-      <Link
-        href={href}
-        onClick={onNavigate}
-        className={`flex items-center gap-3 rounded-xl px-4 py-3.5 font-sans text-[0.7rem] font-bold tracking-[0.18em] uppercase transition-colors duration-200 ${
-          active
-            ? "bg-blue-800/[0.06] text-blue-800"
-            : "text-slate-600 active:bg-slate-100"
-        }`}
-      >
-        {active && (
-          <span className="h-1 w-1 shrink-0 rounded-full bg-blue-800" />
-        )}
-        {label}
-      </Link>
-    </motion.div>
+      {active && <span className="h-1 w-1 shrink-0 rounded-full bg-blue-800" />}
+      {label}
+    </Link>
   );
 }
 
 export function SiteHeader() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
+  const [portalReady, setPortalReady] = useState(false);
   const drawerRef = useRef<HTMLDivElement>(null);
 
   const close = useCallback(() => setOpen(false), []);
 
   useEffect(() => {
-    setOpen(false);
+    const id = requestAnimationFrame(() => setPortalReady(true));
+    return () => cancelAnimationFrame(id);
+  }, []);
+
+  useEffect(() => {
+    const id = requestAnimationFrame(() => setOpen(false));
+    return () => cancelAnimationFrame(id);
   }, [pathname]);
 
   useEffect(() => {
@@ -152,7 +149,7 @@ export function SiteHeader() {
           href="/"
           className="shrink-0 font-sans text-sm font-black tracking-[0.15em] text-slate-900 uppercase"
         >
-          Precision Labs
+          JP AUTO DETAIL
         </Link>
 
         <LayoutGroup id="primary-nav">
@@ -176,8 +173,7 @@ export function SiteHeader() {
 
           <button
             type="button"
-            className="relative inline-flex items-center justify-center rounded-full border border-slate-200 bg-white p-2.5 text-slate-800 transition-colors duration-200 active:bg-slate-50 md:hidden"
-            style={{ width: 44, height: 44 }}
+            className={`${mobileMenuIconButtonClassName} md:hidden`}
             aria-expanded={open}
             aria-controls="mobile-nav-panel"
             aria-label={open ? "Close menu" : "Open menu"}
@@ -212,103 +208,96 @@ export function SiteHeader() {
         </div>
       </div>
 
-      <AnimatePresence>
-        {open && (
-          <div className="fixed inset-0 z-50 md:hidden" id="mobile-nav-panel">
-            {/* Scrim */}
-            <motion.div
-              variants={scrimVariants}
-              initial="hidden"
-              animate="visible"
-              exit="hidden"
-              transition={{ duration: 0.25, ease: "easeOut" }}
-              className="absolute inset-0 bg-slate-900/20 backdrop-blur-[2px]"
-              onClick={close}
-              aria-hidden
-            />
-
-            {/* Drawer */}
-            <motion.nav
-              ref={drawerRef}
-              role="dialog"
-              aria-modal="true"
-              aria-label="Mobile navigation"
-              variants={drawerVariants}
-              initial="hidden"
-              animate="visible"
-              exit="hidden"
-              transition={springTransition}
-              className="absolute inset-y-0 right-0 flex w-[300px] max-w-[calc(100vw-56px)] flex-col border-l border-slate-200/60 bg-white/95 shadow-2xl backdrop-blur-xl"
-              style={{
-                paddingTop: "env(safe-area-inset-top)",
-                paddingBottom: "env(safe-area-inset-bottom)",
-              }}
-            >
-              {/* Drawer header */}
-              <div className="flex shrink-0 items-center justify-between px-5 pb-4 pt-5">
-                <Link
-                  href="/"
-                  onClick={close}
-                  className="font-sans text-xs font-black tracking-[0.15em] text-slate-900 uppercase"
+      {portalReady
+        ? createPortal(
+            <AnimatePresence>
+              {open && (
+                <div
+                  className="fixed inset-0 z-[100] md:hidden"
+                  id="mobile-nav-panel"
                 >
-                  Precision Labs
-                </Link>
-                <button
-                  type="button"
-                  className="inline-flex items-center justify-center rounded-full border border-slate-200 bg-white p-2 text-slate-500 transition-colors duration-200 active:bg-slate-50"
-                  aria-label="Close menu"
-                  onClick={close}
-                >
-                  <X className="h-4 w-4" weight="bold" aria-hidden />
-                </button>
-              </div>
-
-              <div className="mx-5 h-px bg-slate-100" />
-
-              {/* Nav links */}
-              <div className="flex min-h-0 flex-1 flex-col gap-0.5 overflow-y-auto px-3 py-4">
-                {navItems.map((item, i) => {
-                  const active =
-                    item.href === "/"
-                      ? pathname === "/"
-                      : pathname === item.href;
-                  return (
-                    <MobileNavLink
-                      key={item.href}
-                      href={item.href}
-                      label={item.label}
-                      active={active}
-                      onNavigate={close}
-                      index={i}
-                    />
-                  );
-                })}
-              </div>
-
-              {/* Book CTA */}
-              <div className="shrink-0 px-5 pb-6">
-                <motion.div
-                  initial={{ opacity: 0, y: 6 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{
-                    delay: 0.04 * navItems.length,
-                    duration: 0.35,
-                    ease: [0.25, 1, 0.5, 1],
-                  }}
-                >
-                  <Link
-                    href="/contact"
+                  {/* Scrim */}
+                  <motion.div
+                    variants={scrimVariants}
+                    initial="hidden"
+                    animate="visible"
+                    exit="hidden"
+                    transition={{ duration: 0.25, ease: "easeOut" }}
+                    className="absolute inset-0 bg-slate-900/20 backdrop-blur-[2px]"
                     onClick={close}
-                    className="block rounded-xl bg-blue-800 py-3 text-center font-sans text-[0.65rem] font-bold tracking-[0.2em] text-white uppercase shadow-sm transition-all duration-200 active:scale-[0.98]"
+                    aria-hidden
+                  />
+
+                  <motion.nav
+                    ref={drawerRef}
+                    role="dialog"
+                    aria-modal="true"
+                    aria-label="Mobile navigation"
+                    variants={drawerVariants}
+                    initial="hidden"
+                    animate="visible"
+                    exit="hidden"
+                    transition={springTransition}
+                    className="absolute inset-y-0 right-0 flex h-full min-h-0 w-[300px] max-w-[calc(100vw-56px)] flex-col border-l border-slate-200/60 bg-white/95 shadow-2xl backdrop-blur-xl"
+                    style={{
+                      paddingTop: "env(safe-area-inset-top)",
+                      paddingBottom: "env(safe-area-inset-bottom)",
+                    }}
                   >
-                    Book Now
-                  </Link>
-                </motion.div>
-              </div>
-            </motion.nav>
-          </div>
-        )}
-      </AnimatePresence>
+                    <div className="flex shrink-0 items-center justify-between px-6 py-4">
+                      <Link
+                        href="/"
+                        onClick={close}
+                        className="font-sans text-xs font-black tracking-[0.15em] text-slate-900 uppercase"
+                      >
+                        JP AUTO DETAIL
+                      </Link>
+                      <button
+                        type="button"
+                        className={mobileMenuIconButtonClassName}
+                        aria-label="Close menu"
+                        onClick={close}
+                      >
+                        <X className="h-5 w-5" weight="bold" aria-hidden />
+                      </button>
+                    </div>
+
+                    <div className="mx-6 h-px shrink-0 bg-slate-100" />
+
+                    <div className="flex min-h-0 flex-1 flex-col gap-0.5 overflow-y-auto px-3 py-4">
+                      {navItems.map((item) => {
+                        const active =
+                          item.href === "/"
+                            ? pathname === "/"
+                            : pathname === item.href;
+                        return (
+                          <MobileNavLink
+                            key={item.href}
+                            href={item.href}
+                            label={item.label}
+                            active={active}
+                            onNavigate={close}
+                          />
+                        );
+                      })}
+                    </div>
+
+                    <div className="shrink-0 px-6 pb-6">
+                      <Link
+                        href="/contact"
+                        onClick={close}
+                        className="block rounded-xl bg-blue-800 py-3 text-center font-sans text-[0.65rem] font-bold tracking-[0.2em] text-white uppercase shadow-sm transition-all duration-200 active:scale-[0.98]"
+                      >
+                        Book Now
+                      </Link>
+                    </div>
+                  </motion.nav>
+                </div>
+              )}
+            </AnimatePresence>,
+            document.body,
+          )
+        : null}
     </header>
   );
 }

@@ -9,7 +9,7 @@ const spaceGrotesk = Space_Grotesk({
 });
 
 export const metadata: Metadata = {
-  title: "PRECISION LABS | Engineered for Excellence",
+  title: "JP AUTO DETAIL | Engineered for Excellence",
   description:
     "Scientific precision for elite automotive detailing, ceramic coating, and restoration.",
 };

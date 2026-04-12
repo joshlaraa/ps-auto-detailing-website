@@ -8,7 +8,7 @@ const testimonials = [
   },
   {
     quote:
-      "Precision Labs is the only service I trust with my vintage Ferraris. Simply unmatched expertise.",
+      "JP AUTO DETAIL is the only service I trust with my vintage Ferraris. Simply unmatched expertise.",
     author: "MARCUS R. | COLLECTOR",
   },
   {

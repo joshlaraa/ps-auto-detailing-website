@@ -7,7 +7,7 @@ export function SiteFooter() {
       <div className="mx-auto grid max-w-screen-2xl grid-cols-1 gap-12 px-8 py-16 md:grid-cols-4">
         <div>
           <div className="mb-6 font-sans text-lg font-black text-slate-900 uppercase">
-            PRECISION LABS
+            JP AUTO DETAIL
           </div>
           <p className="max-w-xs text-sm font-medium text-slate-500 leading-relaxed">
             Specialized in exotic and luxury vehicle restoration. Operating
@@ -108,7 +108,7 @@ export function SiteFooter() {
       <div className="border-slate-200/50 border-t bg-slate-100 py-8">
         <div className="mx-auto flex max-w-screen-2xl flex-col items-center justify-between gap-4 px-8 md:flex-row">
           <div className="font-sans text-sm text-slate-500 uppercase tracking-widest">
-            © 2026 PRECISION LABS AUTOMOTIVE. ENGINEERED FOR PERFECTION.
+            © 2026 JP AUTO DETAIL AUTOMOTIVE. ENGINEERED FOR PERFECTION.
           </div>
         </div>
       </div>

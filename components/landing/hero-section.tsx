@@ -11,26 +11,32 @@ const stats = [
 
 export function HeroSection() {
   return (
-    <section className="relative flex min-h-screen flex-col justify-center overflow-hidden bg-slate-50 px-6 pt-20 md:px-12">
-      <div className="absolute inset-0 -z-10 opacity-40">
-        <div className="absolute inset-0 bg-linear-to-b from-transparent via-slate-50 to-slate-50" />
-        <Image
-          src={landingMedia.heroCar}
-          alt="Close-up of a high-end black sports car with sharp reflections and professional studio lighting"
-          fill
-          priority
-          className="object-cover"
-          sizes="100vw"
-        />
+    <section className="relative isolate flex min-h-dvh flex-col justify-center overflow-hidden bg-slate-50 px-6 pt-20 pb-16 md:px-12 md:pb-24">
+      <div className="pointer-events-none absolute inset-0 z-0" aria-hidden>
+        <picture className="absolute inset-0 block size-full">
+          <source media="(min-width: 768px)" srcSet={landingMedia.heroCar} />
+          <Image
+            src={landingMedia.heroCarMobile}
+            alt="JP Auto Detail mobile van and a vehicle being foam-washed on a residential driveway"
+            fill
+            priority
+            quality={90}
+            className="object-cover object-[center_48%] md:object-[center_45%]"
+            sizes="100vw"
+          />
+        </picture>
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgb(248_250_252/0.9)_0%,rgb(248_250_252/0.8)_24%,rgb(248_250_252/0.7)_34%,rgb(248_250_252/0.12)_100%)]" />
+        <div className="absolute inset-0 bg-linear-to-b from-slate-50/30 from-0% via-transparent via-45% to-slate-50 to-100%" />
       </div>
-      <div className="max-w-6xl">
+      <div className="relative z-10 max-w-6xl">
         <p className="mb-6 font-sans text-sm font-bold text-blue-800 uppercase tracking-[0.3em]">
-          SCIENTIFIC PRECISION FOR THE ELITE
+          SAN DIEGO'S MOBILE CAR DETAILING SERVICE
         </p>
         <h1 className="mb-12 font-clash text-6xl leading-[0.9] font-bold tracking-tighter text-slate-900 md:text-[7rem]">
-          ENGINEERED FOR <br />{" "}
+          BRINGING ELITE <br />
+          SHINE TO <br />{" "}
           <span className="bg-linear-to-br from-blue-900 to-blue-600 bg-clip-text text-transparent">
-            EXCELLENCE
+            YOUR VEHICLE
           </span>
         </h1>
         <div className="mb-20 flex flex-col gap-6 md:flex-row">

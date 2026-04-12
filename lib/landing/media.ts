@@ -1,6 +1,6 @@
 export const landingMedia = {
-  heroCar:
-    "https://lh3.googleusercontent.com/aida-public/AB6AXuAshK6V4sPLx5FhsPL8Ecy1lsMrv3qX-mJp0UEnsImQ3TbPulNgbfR8WT_Hmda9jmPQvZ6ljoU9r7EqUDlHs1sAXl6Dly59zuXHtV6329XcGQQOE9Mp6VMC_mG4w19vXhYE3fJRmPdSVOY8gYI6hDJ6moTeoqyhtozWiOvb9TEBnGQTqpHw2olHSW9F1H3-GaQZJAJINOp21XwZXqw6TyXIiF7s8to2TT0leBsF8YD9ON1QfK_kK8G89u7ygQ519Fyi7rFgH7uttIY",
+  heroCar: "/jp_auto_detail_hero.png",
+  heroCarMobile: "/jp_auto_detail_hero_mobile.png",
   processWater:
     "https://lh3.googleusercontent.com/aida-public/AB6AXuBNONwLwQi-um5oMQITC9cIA1WcAIvJsKZVHq5XLQGehgGQEhXdiw8dIyo-ZyvQKuin0OyFJsFtqLgRa7_X7vLTHe5vml1G37xAfyVYvmsPyAt45nvcVt81knS0st90i5-1GYslgmrS3fhFHAELppa4u2UqZUGChyxzJklDCKAapv5dkpiXwVmeiH3NMwQhLYOBYXeNSgpAIefOmGFXPj9JOAlP0cOFdW5I4nBEVcT8rfsfx861VjyryZWCx3VglKrEN7LBH9tjMBc",
   anatomyInterior:
