@@ -2,11 +2,8 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
-import {
-  List,
-  XCircle,
-} from "@phosphor-icons/react";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { List, X } from "@phosphor-icons/react";
 import { AnimatePresence, LayoutGroup, motion } from "framer-motion";
 
 const navItems = [
@@ -16,6 +13,25 @@ const navItems = [
   { href: "/contact", label: "Contact Us" },
   { href: "/products", label: "Products" },
 ] as const;
+
+const DRAWER_WIDTH = 300;
+
+const scrimVariants = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1 },
+} as const;
+
+const drawerVariants = {
+  hidden: { x: DRAWER_WIDTH },
+  visible: { x: 0 },
+} as const;
+
+const springTransition = {
+  type: "spring" as const,
+  stiffness: 400,
+  damping: 40,
+  mass: 0.8,
+};
 
 function NavLink({
   href,
@@ -27,8 +43,7 @@ function NavLink({
   onNavigate?: () => void;
 }) {
   const pathname = usePathname();
-  const active =
-    href === "/" ? pathname === "/" : pathname === href;
+  const active = href === "/" ? pathname === "/" : pathname === href;
 
   return (
     <Link
@@ -60,9 +75,53 @@ function NavLink({
   );
 }
 
+function MobileNavLink({
+  href,
+  label,
+  active,
+  onNavigate,
+  index,
+}: {
+  href: string;
+  label: string;
+  active: boolean;
+  onNavigate: () => void;
+  index: number;
+}) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 8 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{
+        delay: 0.04 * index,
+        duration: 0.35,
+        ease: [0.25, 1, 0.5, 1],
+      }}
+    >
+      <Link
+        href={href}
+        onClick={onNavigate}
+        className={`flex items-center gap-3 rounded-xl px-4 py-3.5 font-sans text-[0.7rem] font-bold tracking-[0.18em] uppercase transition-colors duration-200 ${
+          active
+            ? "bg-blue-800/[0.06] text-blue-800"
+            : "text-slate-600 active:bg-slate-100"
+        }`}
+      >
+        {active && (
+          <span className="h-1 w-1 shrink-0 rounded-full bg-blue-800" />
+        )}
+        {label}
+      </Link>
+    </motion.div>
+  );
+}
+
 export function SiteHeader() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
+  const drawerRef = useRef<HTMLDivElement>(null);
+
+  const close = useCallback(() => setOpen(false), []);
 
   useEffect(() => {
     setOpen(false);
@@ -71,20 +130,24 @@ export function SiteHeader() {
   useEffect(() => {
     if (!open) return;
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setOpen(false);
+      if (e.key === "Escape") close();
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
+  }, [open, close]);
+
+  useEffect(() => {
+    if (!open) return;
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = prev;
+    };
   }, [open]);
 
   return (
-    <header className="sticky top-0 z-50 border-slate-200/80 border-b bg-slate-50/90 backdrop-blur-md">
-      <motion.div
-        initial={false}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ type: "spring", stiffness: 420, damping: 34 }}
-        className="mx-auto flex max-w-screen-2xl items-center justify-between gap-6 px-6 py-4 md:px-10"
-      >
+    <header className="sticky top-0 z-50 border-b border-slate-200/80 bg-slate-50/90 backdrop-blur-md">
+      <div className="mx-auto flex max-w-screen-2xl items-center justify-between gap-6 px-6 py-4 md:px-10">
         <Link
           href="/"
           className="shrink-0 font-sans text-sm font-black tracking-[0.15em] text-slate-900 uppercase"
@@ -106,14 +169,15 @@ export function SiteHeader() {
         <div className="flex items-center gap-3">
           <Link
             href="/contact"
-            className="hidden cursor-pointer rounded-full bg-blue-800 px-5 py-2.5 font-sans text-[0.65rem] font-bold tracking-[0.2em] text-white uppercase shadow-sm transition-transform hover:scale-[1.02] active:scale-[0.98] md:inline-flex"
+            className="hidden rounded-full bg-blue-800 px-5 py-2.5 font-sans text-[0.65rem] font-bold tracking-[0.2em] text-white uppercase shadow-sm transition-transform hover:scale-[1.02] active:scale-[0.98] md:inline-flex"
           >
             Book
           </Link>
 
           <button
             type="button"
-            className="inline-flex cursor-pointer items-center justify-center rounded-full border border-slate-200 bg-white p-2.5 text-slate-800 md:hidden"
+            className="relative inline-flex items-center justify-center rounded-full border border-slate-200 bg-white p-2.5 text-slate-800 transition-colors duration-200 active:bg-slate-50 md:hidden"
+            style={{ width: 44, height: 44 }}
             aria-expanded={open}
             aria-controls="mobile-nav-panel"
             aria-label={open ? "Close menu" : "Open menu"}
@@ -123,100 +187,127 @@ export function SiteHeader() {
               {open ? (
                 <motion.span
                   key="close"
-                  initial={{ rotate: -90, opacity: 0 }}
-                  animate={{ rotate: 0, opacity: 1 }}
-                  exit={{ rotate: 90, opacity: 0 }}
-                  transition={{ duration: 0.2 }}
-                  className="inline-flex"
+                  className="flex"
+                  initial={{ opacity: 0, rotate: -90 }}
+                  animate={{ opacity: 1, rotate: 0 }}
+                  exit={{ opacity: 0, rotate: 90 }}
+                  transition={{ duration: 0.15, ease: "easeInOut" }}
                 >
-                  <XCircle className="h-6 w-6" weight="duotone" aria-hidden />
+                  <X className="h-5 w-5" weight="bold" aria-hidden />
                 </motion.span>
               ) : (
                 <motion.span
                   key="open"
-                  initial={{ rotate: 90, opacity: 0 }}
-                  animate={{ rotate: 0, opacity: 1 }}
-                  exit={{ rotate: -90, opacity: 0 }}
-                  transition={{ duration: 0.2 }}
-                  className="inline-flex"
+                  className="flex"
+                  initial={{ opacity: 0, rotate: 90 }}
+                  animate={{ opacity: 1, rotate: 0 }}
+                  exit={{ opacity: 0, rotate: -90 }}
+                  transition={{ duration: 0.15, ease: "easeInOut" }}
                 >
-                  <List className="h-6 w-6" weight="duotone" aria-hidden />
+                  <List className="h-5 w-5" weight="bold" aria-hidden />
                 </motion.span>
               )}
             </AnimatePresence>
           </button>
         </div>
-      </motion.div>
+      </div>
 
       <AnimatePresence>
-        {open ? (
-          <motion.button
-            key="mobile-nav-backdrop"
-            type="button"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.2 }}
-            className="fixed inset-0 z-40 cursor-pointer bg-slate-900/40 md:hidden"
-            aria-label="Close menu"
-            onClick={() => setOpen(false)}
-          />
-        ) : null}
-      </AnimatePresence>
-      <AnimatePresence>
-        {open ? (
+        {open && (
+          <div className="fixed inset-0 z-50 md:hidden" id="mobile-nav-panel">
+            {/* Scrim */}
             <motion.div
-              key="mobile-nav-panel"
-              id="mobile-nav-panel"
+              variants={scrimVariants}
+              initial="hidden"
+              animate="visible"
+              exit="hidden"
+              transition={{ duration: 0.25, ease: "easeOut" }}
+              className="absolute inset-0 bg-slate-900/20 backdrop-blur-[2px]"
+              onClick={close}
+              aria-hidden
+            />
+
+            {/* Drawer */}
+            <motion.nav
+              ref={drawerRef}
               role="dialog"
               aria-modal="true"
               aria-label="Mobile navigation"
-              initial={{ opacity: 0, scale: 0.88, y: -36, rotate: 2 }}
-              animate={{ opacity: 1, scale: 1, y: 0, rotate: 0 }}
-              exit={{ opacity: 0, scale: 0.9, y: -20, rotate: -2 }}
-              transition={{ type: "spring", stiffness: 420, damping: 32 }}
-              style={{ transformOrigin: "100% 0%" }}
-              className="fixed top-17 right-4 z-50 w-[min(calc(100vw-2rem),20rem)] overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-2xl md:hidden"
+              variants={drawerVariants}
+              initial="hidden"
+              animate="visible"
+              exit="hidden"
+              transition={springTransition}
+              className="absolute inset-y-0 right-0 flex w-[300px] max-w-[calc(100vw-56px)] flex-col border-l border-slate-200/60 bg-white/95 shadow-2xl backdrop-blur-xl"
+              style={{
+                paddingTop: "env(safe-area-inset-top)",
+                paddingBottom: "env(safe-area-inset-bottom)",
+              }}
             >
-              <div className="flex flex-col gap-1 p-3">
-                {navItems.map((item, i) => (
-                  <motion.div
-                    key={item.href}
-                    initial={{ opacity: 0, x: 16 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{
-                      delay: 0.04 * i,
-                      type: "spring",
-                      stiffness: 400,
-                      damping: 28,
-                    }}
-                  >
-                    <Link
+              {/* Drawer header */}
+              <div className="flex shrink-0 items-center justify-between px-5 pb-4 pt-5">
+                <Link
+                  href="/"
+                  onClick={close}
+                  className="font-sans text-xs font-black tracking-[0.15em] text-slate-900 uppercase"
+                >
+                  Precision Labs
+                </Link>
+                <button
+                  type="button"
+                  className="inline-flex items-center justify-center rounded-full border border-slate-200 bg-white p-2 text-slate-500 transition-colors duration-200 active:bg-slate-50"
+                  aria-label="Close menu"
+                  onClick={close}
+                >
+                  <X className="h-4 w-4" weight="bold" aria-hidden />
+                </button>
+              </div>
+
+              <div className="mx-5 h-px bg-slate-100" />
+
+              {/* Nav links */}
+              <div className="flex min-h-0 flex-1 flex-col gap-0.5 overflow-y-auto px-3 py-4">
+                {navItems.map((item, i) => {
+                  const active =
+                    item.href === "/"
+                      ? pathname === "/"
+                      : pathname === item.href;
+                  return (
+                    <MobileNavLink
+                      key={item.href}
                       href={item.href}
-                      onClick={() => setOpen(false)}
-                      className="block cursor-pointer rounded-xl px-4 py-3 font-sans text-xs font-bold tracking-[0.2em] text-slate-700 uppercase transition-colors hover:bg-slate-50 hover:text-blue-800"
-                    >
-                      {item.label}
-                    </Link>
-                  </motion.div>
-                ))}
+                      label={item.label}
+                      active={active}
+                      onNavigate={close}
+                      index={i}
+                    />
+                  );
+                })}
+              </div>
+
+              {/* Book CTA */}
+              <div className="shrink-0 px-5 pb-6">
                 <motion.div
-                  initial={{ opacity: 0, y: 8 }}
+                  initial={{ opacity: 0, y: 6 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.2, duration: 0.25 }}
-                  className="mt-2 border-slate-100 border-t pt-3"
+                  transition={{
+                    delay: 0.04 * navItems.length,
+                    duration: 0.35,
+                    ease: [0.25, 1, 0.5, 1],
+                  }}
                 >
                   <Link
                     href="/contact"
-                    onClick={() => setOpen(false)}
-                    className="block cursor-pointer rounded-xl bg-blue-800 py-3 text-center font-sans text-[0.65rem] font-bold tracking-[0.2em] text-white uppercase"
+                    onClick={close}
+                    className="block rounded-xl bg-blue-800 py-3 text-center font-sans text-[0.65rem] font-bold tracking-[0.2em] text-white uppercase shadow-sm transition-all duration-200 active:scale-[0.98]"
                   >
-                    Book
+                    Book Now
                   </Link>
                 </motion.div>
               </div>
-            </motion.div>
-        ) : null}
+            </motion.nav>
+          </div>
+        )}
       </AnimatePresence>
     </header>
   );
