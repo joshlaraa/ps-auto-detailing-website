@@ -1,0 +1,7 @@
+/** Extra imagery for the about page (hero uses `landingMedia` like the home page). */
+export const aboutMedia = {
+  labWide:
+    "https://lh3.googleusercontent.com/aida-public/AB6AXuDH4lafZcwLXeWNlNM98UGrKClIKVbHPutZtN3WfUdWofuOAR_3eoVWVHLZlWZmFCAI2X574I60S6xVFl0LfdrowBScoFpxrgBYVfVkqNSYKp7dJN5hLdFBbNo3QpeOTFUlnRNxQXPiybjHO6chbtfo0y8azwxx50atSLW2SIihXkb11XkS4fgH0zzy_howsEbqg2Cqe58T48jZWY2jJsVk4UuPIjW4rwhSrVwEbFBB4Y7oSuscmUz1I_xZRgpPOIhaERdRSL0Ad7o",
+  labFoam:
+    "https://lh3.googleusercontent.com/aida-public/AB6AXuCMNjcKHrN5Eli5OpWq5xF4_uTPy7V9wtdimm8uyergi8I2FshRAmJEFqUEZMP6gH__tYJ20kHKSqf9lkPDX7TyLUgZtzhr4IOJ7ex7YbJVwULVLGzTvECnRRBtXLkUnqBufCGVksoPfUYkqNvxhyvc627M6mRPrLxOC3MqbO7GIdWeMNHhv_-ogIJyl9CnC6whrglXhA5uaBnpQfdSIkAZwShj9ftdoFsyi53X4b2aONzFQOuGdAMFENaD6UwbhrtTuUosopjrjtk",
+} as const;

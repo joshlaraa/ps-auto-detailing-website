@@ -5,11 +5,44 @@
   --font-sans: var(--font-space-grotesk), ui-sans-serif, system-ui, sans-serif;
   --font-clash: "Clash Display", ui-sans-serif, system-ui, sans-serif;
   --font-label: var(--font-space-grotesk), ui-sans-serif, system-ui, sans-serif;
+  /* Semantic palette (avoid `accent-*` — reserved for accent-color in Tailwind) */
+  --color-background: #f8fafc;
+  --color-foreground: #0f172a;
+  --color-brand: #1e40af;
+  --color-brand-hover: #1e3a8a;
+  --color-on-brand: #ffffff;
+  --color-eyebrow-on-dark: #93c5fd;
+
+  --background-image-hero-overlay: linear-gradient(
+    90deg,
+    rgb(248 250 252 / 0.9) 0%,
+    rgb(248 250 252 / 0.8) 24%,
+    rgb(248 250 252 / 0.7) 34%,
+    rgb(248 250 252 / 0.12) 100%
+  );
+  --background-image-brand-gradient: linear-gradient(
+    135deg,
+    var(--color-brand) 0%,
+    #1d4ed8 100%
+  );
+  --background-image-cta-gradient: linear-gradient(
+    to bottom right,
+    #1e3a8a,
+    #2563eb
+  );
+  --shadow-brand-glow: 0 0 50px rgb(30 64 175 / 0.4);
+
+  --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+  --duration-fast: 150ms;
+  --duration-base: 200ms;
+  --duration-slow: 300ms;
+  --duration-tween: 500ms;
+  --duration-marquee: 40s;
 }
 
 body {
-  background-color: #f8fafc;
-  color: #0f172a;
+  background-color: var(--color-background);
+  color: var(--color-foreground);
 }
 
 button:not(:disabled),
@@ -19,7 +52,7 @@ button:not(:disabled),
 }
 
 .blue-gradient {
-  background-image: linear-gradient(135deg, #1e40af 0%, #1d4ed8 100%);
+  background-image: var(--background-image-brand-gradient);
 }
 
 .no-scrollbar::-webkit-scrollbar {
@@ -38,10 +71,17 @@ button:not(:disabled),
 .animate-marquee {
   display: flex;
   width: fit-content;
-  animation: marquee 40s linear infinite;
+  animation: marquee var(--duration-marquee) linear infinite;
 }
 
 .animate-marquee:hover {
   animation-play-state: paused;
 }
 
+/* Respect reduced-motion preferences for continuously moving UI. */
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee {
+    animation: none;
+    transform: none;
+  }
+}

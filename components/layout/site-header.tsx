@@ -5,7 +5,16 @@ import { usePathname } from "next/navigation";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { List, X } from "@phosphor-icons/react";
-import { AnimatePresence, LayoutGroup, motion } from "framer-motion";
+import {
+  AnimatePresence,
+  LayoutGroup,
+  motion,
+  useMotionValueEvent,
+  useReducedMotion,
+  useScroll,
+} from "framer-motion";
+import { ButtonLink } from "@/components/ui/button";
+import { Container } from "@/components/ui/container";
 
 const navItems = [
   { href: "/", label: "Home" },
@@ -53,7 +62,7 @@ function NavLink({
     <Link
       href={href}
       onClick={onNavigate}
-      className="group relative px-1 py-2 font-sans text-xs font-bold tracking-[0.2em] text-slate-600 uppercase transition-colors hover:text-slate-900"
+      className="group relative px-1 py-2 font-sans text-xs font-bold tracking-[0.2em] text-slate-600 uppercase transition-colors duration-200 hover:text-foreground"
     >
       <motion.span
         className="relative z-10 inline-block"
@@ -66,12 +75,12 @@ function NavLink({
         className="pointer-events-none absolute inset-x-0 bottom-0 h-px overflow-hidden rounded-full bg-slate-200"
         aria-hidden
       >
-        <span className="block h-full w-full origin-left scale-x-0 bg-blue-800/35 transition-transform duration-300 ease-out group-hover:scale-x-100" />
+        <span className="block h-full w-full origin-left scale-x-0 bg-brand/35 transition-transform duration-300 ease-out group-hover:scale-x-100" />
       </span>
       {active ? (
         <motion.span
           layoutId="nav-main-underline"
-          className="pointer-events-none absolute inset-x-0 -bottom-px h-0.5 rounded-full bg-blue-800"
+          className="pointer-events-none absolute inset-x-0 -bottom-px h-0.5 rounded-full bg-brand"
           transition={{ type: "spring", stiffness: 380, damping: 30 }}
         />
       ) : null}
@@ -96,11 +105,11 @@ function MobileNavLink({
       onClick={onNavigate}
       className={`flex items-center gap-3 rounded-xl px-4 py-3.5 font-sans text-[0.7rem] font-bold tracking-[0.18em] uppercase transition-colors duration-200 ${
         active
-          ? "bg-blue-800/[0.06] text-blue-800"
+          ? "bg-brand/[0.06] text-brand"
           : "text-slate-600 active:bg-slate-100"
       }`}
     >
-      {active && <span className="h-1 w-1 shrink-0 rounded-full bg-blue-800" />}
+      {active && <span className="h-1 w-1 shrink-0 rounded-full bg-brand" />}
       {label}
     </Link>
   );
@@ -110,9 +119,17 @@ export function SiteHeader() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const [portalReady, setPortalReady] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
   const drawerRef = useRef<HTMLDivElement>(null);
+  const shouldReduceMotion = useReducedMotion();
+  const { scrollY } = useScroll();
 
   const close = useCallback(() => setOpen(false), []);
+
+  useMotionValueEvent(scrollY, "change", (latest) => {
+    const next = latest > 8;
+    setIsScrolled((prev) => (prev === next ? prev : next));
+  });
 
   useEffect(() => {
     const id = requestAnimationFrame(() => setPortalReady(true));
@@ -143,13 +160,41 @@ export function SiteHeader() {
   }, [open]);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-slate-200/80 bg-slate-50/90 backdrop-blur-md">
-      <div className="mx-auto flex max-w-screen-2xl items-center justify-between gap-6 px-6 py-4 md:px-10">
+    <header className="sticky top-0 z-50 border-b border-slate-200/80 bg-background/90 backdrop-blur-md">
+      <Container className="flex items-center justify-between gap-6 py-4">
         <Link
           href="/"
-          className="shrink-0 font-sans text-sm font-black tracking-[0.15em] text-slate-900 uppercase"
+          className="shrink-0 font-clash text-2xl leading-[0.9] font-bold tracking-tighter text-foreground uppercase"
         >
-          JP AUTO DETAIL
+          <motion.span
+            className="relative inline-block overflow-hidden"
+            initial={shouldReduceMotion ? false : { opacity: 0, y: 6 }}
+            animate={{
+              opacity: 1,
+              y: 0,
+              scale: shouldReduceMotion ? 1 : isScrolled ? 0.94 : 1,
+            }}
+            transition={
+              shouldReduceMotion
+                ? { duration: 0.18, ease: "easeOut" }
+                : {
+                    opacity: { duration: 0.32, ease: "easeOut" },
+                    y: { duration: 0.45, ease: "easeOut" },
+                    scale: { duration: 0.18, ease: "easeOut" },
+                  }
+            }
+          >
+            JP AUTO DETAIL
+            {!shouldReduceMotion ? (
+              <motion.span
+                aria-hidden
+                className="pointer-events-none absolute inset-y-0 -left-1/2 w-1/2 bg-linear-to-r from-transparent via-white/60 to-transparent"
+                initial={{ x: "-120%", opacity: 0 }}
+                animate={{ x: "220%", opacity: [0, 0.45, 0] }}
+                transition={{ duration: 0.7, ease: "easeOut", delay: 0.35 }}
+              />
+            ) : null}
+          </motion.span>
         </Link>
 
         <LayoutGroup id="primary-nav">
@@ -164,12 +209,13 @@ export function SiteHeader() {
         </LayoutGroup>
 
         <div className="flex items-center gap-3">
-          <Link
+          <ButtonLink
             href="/contact"
-            className="hidden rounded-full bg-blue-800 px-5 py-2.5 font-sans text-[0.65rem] font-bold tracking-[0.2em] text-white uppercase shadow-sm transition-transform hover:scale-[1.02] active:scale-[0.98] md:inline-flex"
+            variant="headerPill"
+            className="hidden md:inline-flex"
           >
             Book
-          </Link>
+          </ButtonLink>
 
           <button
             type="button"
@@ -206,7 +252,7 @@ export function SiteHeader() {
             </AnimatePresence>
           </button>
         </div>
-      </div>
+      </Container>
 
       {portalReady
         ? createPortal(
@@ -248,9 +294,33 @@ export function SiteHeader() {
                       <Link
                         href="/"
                         onClick={close}
-                        className="font-sans text-xs font-black tracking-[0.15em] text-slate-900 uppercase"
+                        className="font-clash text-sm leading-[0.9] font-bold text-foreground tracking-tighter uppercase"
                       >
-                        JP AUTO DETAIL
+                        <motion.span
+                          className="relative inline-block overflow-hidden"
+                          initial={shouldReduceMotion ? false : { opacity: 0, y: 4 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={
+                            shouldReduceMotion
+                              ? { duration: 0.18, ease: "easeOut" }
+                              : { duration: 0.4, ease: "easeOut" }
+                          }
+                        >
+                          JP AUTO DETAIL
+                          {!shouldReduceMotion ? (
+                            <motion.span
+                              aria-hidden
+                              className="pointer-events-none absolute inset-y-0 -left-1/2 w-1/2 bg-linear-to-r from-transparent via-white/60 to-transparent"
+                              initial={{ x: "-120%", opacity: 0 }}
+                              animate={{ x: "220%", opacity: [0, 0.45, 0] }}
+                              transition={{
+                                duration: 0.6,
+                                ease: "easeOut",
+                                delay: 0.2,
+                              }}
+                            />
+                          ) : null}
+                        </motion.span>
                       </Link>
                       <button
                         type="button"
@@ -283,13 +353,13 @@ export function SiteHeader() {
                     </div>
 
                     <div className="shrink-0 px-6 pb-6">
-                      <Link
+                      <ButtonLink
                         href="/contact"
+                        variant="mobileDrawer"
                         onClick={close}
-                        className="block rounded-xl bg-blue-800 py-3 text-center font-sans text-[0.65rem] font-bold tracking-[0.2em] text-white uppercase shadow-sm transition-all duration-200 active:scale-[0.98]"
                       >
                         Book Now
-                      </Link>
+                      </ButtonLink>
                     </div>
                   </motion.nav>
                 </div>

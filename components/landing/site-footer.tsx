@@ -1,12 +1,22 @@
 import Link from "next/link";
 import { Envelope, Globe, Phone } from "@phosphor-icons/react/ssr";
+import { Container } from "@/components/ui/container";
+import { cn } from "@/lib/cn";
+import { siteContact } from "@/lib/site/contact";
+
+const footerLinkClass = cn(
+  "cursor-pointer text-slate-500 underline-offset-4 transition-colors duration-200 hover:text-brand hover:underline",
+);
+
+const iconLinkClass =
+  "cursor-pointer text-slate-400 transition-colors duration-200 hover:text-brand";
 
 export function SiteFooter() {
   return (
-    <footer className="w-full border-slate-200/50 border-t bg-slate-50">
-      <div className="mx-auto grid max-w-screen-2xl grid-cols-1 gap-12 px-8 py-16 md:grid-cols-4">
-        <div>
-          <div className="mb-6 font-sans text-lg font-black text-slate-900 uppercase">
+    <footer className="w-full border-slate-200/50 border-t bg-background">
+      <Container className="grid grid-cols-1 gap-12 py-16 md:grid-cols-4">
+        <div className="group">
+          <div className="mb-6 inline-block font-clash text-xl leading-[0.9] font-bold tracking-tighter text-foreground uppercase transition-transform duration-200 ease-out group-hover:scale-[1.02]">
             JP AUTO DETAIL
           </div>
           <p className="max-w-xs text-sm font-medium text-slate-500 leading-relaxed">
@@ -15,102 +25,80 @@ export function SiteFooter() {
           </p>
         </div>
         <div className="space-y-4">
-          <p className="font-sans text-sm font-bold text-slate-900 uppercase tracking-widest">
+          <p className="font-sans text-xs font-bold text-foreground uppercase tracking-widest">
             Services
           </p>
           <ul className="space-y-3 font-sans text-sm font-medium uppercase tracking-widest">
             <li>
-              <Link
-                className="cursor-pointer text-slate-500 underline-offset-4 transition-opacity duration-200 hover:text-blue-600 hover:underline"
-                href="/services"
-              >
+              <Link className={footerLinkClass} href="/services">
                 Ceramic Coating
               </Link>
             </li>
             <li>
-              <Link
-                className="cursor-pointer text-slate-500 underline-offset-4 transition-opacity duration-200 hover:text-blue-600 hover:underline"
-                href="/services"
-              >
+              <Link className={footerLinkClass} href="/services">
                 Paint Correction
               </Link>
             </li>
             <li>
-              <Link
-                className="cursor-pointer text-slate-500 underline-offset-4 transition-opacity duration-200 hover:text-blue-600 hover:underline"
-                href="/services"
-              >
+              <Link className={footerLinkClass} href="/services">
                 Interior Detail
               </Link>
             </li>
             <li>
-              <Link
-                className="cursor-pointer text-slate-500 underline-offset-4 transition-opacity duration-200 hover:text-blue-600 hover:underline"
-                href="/products"
-              >
+              <Link className={footerLinkClass} href="/products">
                 PPF
               </Link>
             </li>
           </ul>
         </div>
         <div className="space-y-4">
-          <p className="font-sans text-sm font-bold text-slate-900 uppercase tracking-widest">
+          <p className="font-sans text-xs font-bold text-foreground uppercase tracking-widest">
             Legal
           </p>
           <ul className="space-y-3 font-sans text-sm font-medium uppercase tracking-widest">
             <li>
-              <Link
-                className="cursor-pointer text-slate-500 underline-offset-4 transition-opacity duration-200 hover:text-blue-600 hover:underline"
-                href="/contact"
-              >
+              <Link className={footerLinkClass} href="/contact">
                 Privacy Policy
               </Link>
             </li>
             <li>
-              <Link
-                className="cursor-pointer text-slate-500 underline-offset-4 transition-opacity duration-200 hover:text-blue-600 hover:underline"
-                href="/contact"
-              >
+              <Link className={footerLinkClass} href="/contact">
                 Terms of Service
               </Link>
             </li>
           </ul>
         </div>
         <div className="space-y-6">
-          <p className="font-sans text-sm font-bold text-slate-900 uppercase tracking-widest">
+          <p className="font-sans text-xs font-bold text-foreground uppercase tracking-widest">
             Connect
           </p>
           <div className="flex gap-6">
             <Link
-              className="cursor-pointer text-slate-400 transition-colors hover:text-blue-700"
+              className={iconLinkClass}
               href="/"
               aria-label="Website"
             >
               <Globe className="h-6 w-6" weight="duotone" aria-hidden />
             </Link>
-            <Link
-              className="cursor-pointer text-slate-400 transition-colors hover:text-blue-700"
-              href="mailto:studio@precisionlabs.auto"
-              aria-label="Email"
-            >
+            <a className={iconLinkClass} href={siteContact.emailHref} aria-label="Email">
               <Envelope className="h-6 w-6" weight="duotone" aria-hidden />
-            </Link>
-            <Link
-              className="cursor-pointer text-slate-400 transition-colors hover:text-blue-700"
-              href="tel:+15555550100"
-              aria-label="Phone"
-            >
+            </a>
+            <a className={iconLinkClass} href={siteContact.phoneHref} aria-label="Phone">
               <Phone className="h-6 w-6" weight="duotone" aria-hidden />
-            </Link>
+            </a>
           </div>
         </div>
-      </div>
+      </Container>
       <div className="border-slate-200/50 border-t bg-slate-100 py-8">
-        <div className="mx-auto flex max-w-screen-2xl flex-col items-center justify-between gap-4 px-8 md:flex-row">
+        <Container className="flex flex-col items-center justify-between gap-4 md:flex-row">
           <div className="font-sans text-sm text-slate-500 uppercase tracking-widest">
-            © 2026 JP AUTO DETAIL AUTOMOTIVE. ENGINEERED FOR PERFECTION.
+            © 2026{" "}
+            <span className="font-clash leading-[0.9] font-bold tracking-tighter text-slate-600">
+              JP AUTO DETAIL
+            </span>{" "}
+            AUTOMOTIVE. ENGINEERED FOR PERFECTION.
           </div>
-        </div>
+        </Container>
       </div>
     </footer>
   );

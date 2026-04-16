@@ -22,7 +22,8 @@ export default function RootLayout({
   return (
     <html lang="en" className={`light ${spaceGrotesk.variable}`}>
       <body
-        className={`${spaceGrotesk.className} selection:bg-blue-800 selection:text-white overflow-x-hidden antialiased`}
+        suppressHydrationWarning
+        className={`${spaceGrotesk.className} selection:bg-brand selection:text-on-brand overflow-x-hidden antialiased`}
       >
         {children}
       </body>
