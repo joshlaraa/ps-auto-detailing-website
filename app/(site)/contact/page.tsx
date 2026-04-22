@@ -69,20 +69,20 @@ export const metadata: Metadata = {
 export default function ContactPage() {
   return (
     <>
-      <div className="bg-background py-24 pt-32 md:py-32 md:pt-36">
+      <div className="bg-background pt-32 pb-24 md:pt-36 md:pb-32">
         <header className="mb-24">
           <Container>
             <div className="flex flex-col justify-between gap-8 md:flex-row md:items-end">
               <div className="max-w-3xl">
-                <Eyebrow className="mb-4 block">Communication protocol</Eyebrow>
+                <Eyebrow className="mb-4 block">Contact Us</Eyebrow>
                 <h1 className="font-clash text-5xl leading-[0.9] font-bold tracking-tighter text-foreground uppercase sm:text-6xl md:text-7xl lg:text-8xl">
-                  Technical inquiry
+                  Ready to Book?
                 </h1>
               </div>
               <div className="text-left md:text-right">
                 <p className="max-w-xs text-sm font-medium text-slate-600 leading-relaxed">
-                  Establishing secure diagnostic channels for automotive
-                  preservation and aesthetic engineering across San Diego.
+                  We're here to help you book your appointment. Reach out to us
+                  today!
                 </p>
               </div>
             </div>
@@ -93,11 +93,11 @@ export default function ContactPage() {
           <div className="grid grid-cols-1 gap-12 lg:grid-cols-12">
             <Card className="p-10 lg:col-span-7">
               <div className="mb-10">
-                <h2 className="mb-2 font-clash text-2xl font-bold tracking-tight text-foreground">
-                  Precision inquiry
+                <h2 className="mb-2 font-clash text-2xl font-bold tracking-tight text-foreground uppercase">
+                  How can we help you?
                 </h2>
                 <p className="text-sm font-medium text-slate-600">
-                  Required parameters for initial diagnostic assessment.
+                  Fill out the form below to get in touch with us.
                 </p>
               </div>
               <ContactInquiryForm />
@@ -106,7 +106,7 @@ export default function ContactPage() {
             <aside className="space-y-8 lg:col-span-5">
               <div className="rounded-xl bg-slate-100 p-8">
                 <Eyebrow as="h3" size="compact" className="mb-6">
-                  Immediate assistance
+                  Contact Information
                 </Eyebrow>
                 <div className="space-y-6">
                   <div className="flex items-start gap-4">
@@ -114,8 +114,8 @@ export default function ContactPage() {
                       <Flask className="size-5" weight="duotone" aria-hidden />
                     </div>
                     <div>
-                      <p className="mb-1 font-sans text-xs font-semibold text-slate-500 uppercase tracking-widest">
-                        Detailing specialists
+                      <p className="mb-1 font-sans text-xs font-bold text-slate-500 uppercase tracking-widest">
+                        Phone
                       </p>
                       <a
                         href={siteContact.phoneHref}
@@ -130,11 +130,15 @@ export default function ContactPage() {
                   </div>
                   <div className="flex items-start gap-4">
                     <div className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-white text-brand">
-                      <Headset className="size-5" weight="duotone" aria-hidden />
+                      <Headset
+                        className="size-5"
+                        weight="duotone"
+                        aria-hidden
+                      />
                     </div>
                     <div>
-                      <p className="mb-1 font-sans text-xs font-semibold text-slate-500 uppercase tracking-widest">
-                        Concierge operations
+                      <p className="mb-1 font-sans text-xs font-bold text-slate-500 uppercase tracking-widest">
+                        Email
                       </p>
                       <a
                         href={siteContact.emailHref}
@@ -153,7 +157,7 @@ export default function ContactPage() {
               <div className="group relative overflow-hidden rounded-xl bg-slate-200 p-8">
                 <div className="relative z-10">
                   <Eyebrow as="h3" size="compact" className="mb-6">
-                    Service footprint
+                    Business Hours
                   </Eyebrow>
                   <div className="space-y-4">
                     <div>
@@ -172,7 +176,7 @@ export default function ContactPage() {
                           Operational hours
                         </p>
                         <p className="text-sm font-medium text-foreground">
-                          08:00 — 18:00 PST
+                          Monday - Saturday <br /> 8:00 AM - 5:00 PM PST
                         </p>
                       </div>
                       <div>

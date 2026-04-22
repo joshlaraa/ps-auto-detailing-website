@@ -104,9 +104,7 @@ function MobileNavLink({
       href={href}
       onClick={onNavigate}
       className={`flex items-center gap-3 rounded-xl px-4 py-3.5 font-sans text-[0.7rem] font-bold tracking-[0.18em] uppercase transition-colors duration-200 ${
-        active
-          ? "bg-brand/[0.06] text-brand"
-          : "text-slate-600 active:bg-slate-100"
+        active ? "bg-brand/6 text-brand" : "text-slate-600 active:bg-slate-100"
       }`}
     >
       {active && <span className="h-1 w-1 shrink-0 rounded-full bg-brand" />}
@@ -121,6 +119,7 @@ export function SiteHeader() {
   const [portalReady, setPortalReady] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const drawerRef = useRef<HTMLDivElement>(null);
+  const headerRef = useRef<HTMLElement>(null);
   const shouldReduceMotion = useReducedMotion();
   const { scrollY } = useScroll();
 
@@ -159,8 +158,28 @@ export function SiteHeader() {
     };
   }, [open]);
 
+  // Keep --site-header-height in sync with the real rendered header height so
+  // the hero section can use calc(100dvh - var(--site-header-height)) accurately.
+  useEffect(() => {
+    const el = headerRef.current;
+    if (!el) return;
+    const update = () => {
+      document.documentElement.style.setProperty(
+        "--site-header-height",
+        `${el.getBoundingClientRect().height}px`,
+      );
+    };
+    update();
+    const ro = new ResizeObserver(update);
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, []);
+
   return (
-    <header className="sticky top-0 z-50 border-b border-slate-200/80 bg-background/90 backdrop-blur-md">
+    <header
+      ref={headerRef}
+      className="sticky top-0 z-50 border-b border-slate-200/80 bg-background/90 backdrop-blur-md"
+    >
       <Container className="flex items-center justify-between gap-6 py-4">
         <Link
           href="/"
@@ -259,7 +278,7 @@ export function SiteHeader() {
             <AnimatePresence>
               {open && (
                 <div
-                  className="fixed inset-0 z-[100] md:hidden"
+                  className="fixed inset-0 z-100 md:hidden"
                   id="mobile-nav-panel"
                 >
                   {/* Scrim */}
@@ -298,7 +317,9 @@ export function SiteHeader() {
                       >
                         <motion.span
                           className="relative inline-block overflow-hidden"
-                          initial={shouldReduceMotion ? false : { opacity: 0, y: 4 }}
+                          initial={
+                            shouldReduceMotion ? false : { opacity: 0, y: 4 }
+                          }
                           animate={{ opacity: 1, y: 0 }}
                           transition={
                             shouldReduceMotion

@@ -59,7 +59,7 @@ const plansOneTime: {
 ];
 
 const toggleBtn = cn(
-  "cursor-pointer px-6 py-2 font-sans text-xs font-bold tracking-widest uppercase transition-colors duration-200",
+  "cursor-pointer rounded-none px-8 py-3 font-clash text-sm font-bold tracking-widest uppercase transition-colors duration-200",
 );
 
 export function PricingSection() {
@@ -153,7 +153,7 @@ export function PricingSection() {
               ) : (
                 <Link
                   href="/contact"
-                  className={buttonStyles.blockOutlineWide}
+                  className={buttonStyles.blockOutline}
                 >
                   CHOOSE PROTOCOL
                 </Link>

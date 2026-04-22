@@ -23,48 +23,48 @@ export function ContactInquiryForm() {
   return (
     <form className="space-y-8" onSubmit={handleSubmit} noValidate>
       <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
-        <Field id="contact-name" label="Operator identity">
+        <Field id="contact-name" label="Full Name">
           <FieldInput
             id="contact-name"
             name="name"
-            placeholder="Full name"
+            placeholder="John Doe"
             type="text"
             autoComplete="name"
             required
           />
         </Field>
-        <Field id="contact-email" label="Communication node">
+        <Field id="contact-email" label="Email Address">
           <FieldInput
             id="contact-email"
             name="email"
-            placeholder="Email address"
+            placeholder="john.doe@example.com"
             type="email"
             autoComplete="email"
             required
           />
         </Field>
       </div>
-      <Field id="contact-vehicle" label="Vehicle specification">
+      <Field id="contact-vehicle" label="Vehicle Details">
         <FieldInput
           id="contact-vehicle"
           name="vehicle"
-          placeholder="Year, make, model"
+          placeholder="2024 Toyota Camry"
           type="text"
           autoComplete="off"
         />
       </Field>
-      <Field id="contact-message" label="Detailing requirements">
+      <Field id="contact-message" label="Reason for Contact">
         <FieldTextarea
           id="contact-message"
           name="message"
-          placeholder="Outline specific restoration or protection objectives…"
+          placeholder="Outline your reason for contacting us…"
           rows={5}
           required
         />
       </Field>
       <div className="pt-4">
         <Button variant="formSubmit" type="submit">
-          Initialize protocol
+          Send Message
         </Button>
       </div>
     </form>

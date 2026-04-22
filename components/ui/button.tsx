@@ -5,50 +5,95 @@ import { cn } from "@/lib/cn";
 const focusRing =
   "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2";
 
+const disabledStates = "disabled:opacity-50 disabled:cursor-not-allowed";
+
+/**
+ * Geometry + label style shared with hero CTAs: rectangular (no radius), Clash, wide tracking.
+ * Variants only change color, border, width, and motion — not the fundamental “slab” shape.
+ */
+const ctaLabel =
+  "rounded-none font-clash text-sm font-bold tracking-widest uppercase";
+
+/** Default hero-style padding for standalone / inline CTAs */
+const ctaPad = "px-10 py-5 md:px-12";
+
 export const buttonStyles = {
   heroPrimary: cn(
-    "inline-flex items-center justify-center bg-brand px-10 py-5 font-clash text-sm font-bold tracking-widest text-on-brand uppercase transition-transform hover:scale-105 md:px-12",
+    "inline-flex items-center justify-center bg-brand",
+    ctaPad,
+    ctaLabel,
+    "text-on-brand transition-transform hover:scale-105",
     focusRing,
+    disabledStates,
   ),
   heroSecondary: cn(
-    "inline-flex items-center justify-center border border-brand/20 px-10 py-5 font-clash text-sm font-bold tracking-widest text-brand uppercase transition-colors hover:bg-brand/5 md:px-12",
+    "inline-flex items-center justify-center border border-brand/20",
+    ctaPad,
+    ctaLabel,
+    "text-brand transition-colors hover:bg-brand/5",
     focusRing,
+    disabledStates,
   ),
   heroSecondaryDark: cn(
-    "inline-flex items-center justify-center border border-white/35 px-10 py-5 font-clash text-sm font-bold tracking-widest text-white uppercase transition-colors hover:bg-white/10 md:px-12",
+    "inline-flex items-center justify-center border border-white/35",
+    ctaPad,
+    ctaLabel,
+    "text-white transition-colors hover:bg-white/10",
     focusRing,
+    disabledStates,
   ),
+  /** Header bar — same corners as hero, tighter padding for the nav row */
   headerPill: cn(
-    "inline-flex items-center justify-center rounded-full bg-brand px-5 py-2.5 font-sans text-[0.65rem] font-bold tracking-[0.2em] text-on-brand uppercase shadow-sm transition-transform hover:scale-[1.02] active:scale-[0.98]",
+    "inline-flex items-center justify-center bg-brand px-6 py-3 md:px-8",
+    ctaLabel,
+    "text-on-brand shadow-sm transition-transform hover:scale-[1.02] active:scale-[0.98]",
     focusRing,
+    disabledStates,
   ),
+  /** Full-width drawer footer CTA */
   mobileDrawer: cn(
-    "block w-full rounded-xl bg-brand py-3 text-center font-sans text-[0.65rem] font-bold tracking-[0.2em] text-on-brand uppercase shadow-sm transition-all duration-200 active:scale-[0.98]",
+    "inline-flex w-full items-center justify-center bg-brand px-6 py-5",
+    ctaLabel,
+    "text-on-brand shadow-sm transition-all duration-200 active:scale-[0.98]",
     focusRing,
+    disabledStates,
   ),
   bookingPrimary: cn(
-    "inline-flex items-center justify-center bg-brand px-16 py-6 font-clash text-sm font-bold tracking-[0.3em] text-on-brand uppercase shadow-brand-glow transition-transform hover:scale-105",
+    "inline-flex items-center justify-center bg-brand",
+    ctaPad,
+    ctaLabel,
+    "text-on-brand shadow-brand-glow transition-transform hover:scale-105",
     focusRing,
+    disabledStates,
   ),
   blockBrand: cn(
-    "block w-full cursor-pointer bg-brand py-4 text-center font-sans text-xs font-bold tracking-[0.2em] text-on-brand uppercase transition-all hover:scale-[1.02]",
+    "inline-flex w-full cursor-pointer items-center justify-center bg-brand px-6 py-5 md:px-8",
+    ctaLabel,
+    "text-on-brand transition-all hover:scale-[1.02]",
     focusRing,
+    disabledStates,
   ),
   blockBrandPricing: cn(
-    "block w-full cursor-pointer bg-brand py-4 text-center font-sans text-xs font-bold tracking-widest text-on-brand uppercase transition-colors hover:bg-brand-hover",
+    "inline-flex w-full cursor-pointer items-center justify-center bg-brand px-6 py-5 md:px-8",
+    ctaLabel,
+    "text-on-brand transition-colors hover:bg-brand-hover",
     focusRing,
+    disabledStates,
   ),
   blockOutline: cn(
-    "block w-full cursor-pointer border border-slate-200 py-4 text-center font-sans text-xs font-bold tracking-[0.2em] text-foreground uppercase transition-all hover:border-brand hover:text-brand",
+    "inline-flex w-full cursor-pointer items-center justify-center border border-slate-200 px-6 py-5 md:px-8",
+    ctaLabel,
+    "text-foreground transition-all hover:border-brand hover:text-brand",
     focusRing,
-  ),
-  blockOutlineWide: cn(
-    "block w-full cursor-pointer border border-slate-200 py-4 text-center font-sans text-xs font-bold tracking-widest text-foreground uppercase transition-all hover:border-brand hover:text-brand",
-    focusRing,
+    disabledStates,
   ),
   formSubmit: cn(
-    "w-full rounded-lg bg-cta-gradient px-10 py-4 font-sans text-xs font-bold tracking-widest text-on-brand uppercase shadow-lg shadow-blue-900/10 transition-all hover:opacity-90 active:scale-[0.98] md:w-auto",
+    "inline-flex w-full items-center justify-center bg-cta-gradient md:w-auto",
+    ctaPad,
+    ctaLabel,
+    "text-on-brand shadow-lg shadow-blue-900/10 transition-all hover:opacity-90 active:scale-[0.98]",
     focusRing,
+    disabledStates,
   ),
 } as const;
 

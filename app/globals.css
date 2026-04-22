@@ -4,7 +4,6 @@
 @theme inline {
   --font-sans: var(--font-space-grotesk), ui-sans-serif, system-ui, sans-serif;
   --font-clash: "Clash Display", ui-sans-serif, system-ui, sans-serif;
-  --font-label: var(--font-space-grotesk), ui-sans-serif, system-ui, sans-serif;
   /* Semantic palette (avoid `accent-*` — reserved for accent-color in Tailwind) */
   --color-background: #f8fafc;
   --color-foreground: #0f172a;
@@ -38,6 +37,7 @@
   --duration-slow: 300ms;
   --duration-tween: 500ms;
   --duration-marquee: 40s;
+
 }
 
 body {
@@ -83,5 +83,30 @@ button:not(:disabled),
   .animate-marquee {
     animation: none;
     transform: none;
+  }
+}
+
+/*
+ * Hero section: exact viewport height minus the sticky header so the whole hero
+ * (headline, body, buttons, bottom stats) fits on first paint without scrolling.
+ * --site-header-height is measured from the header's py-4 + content (~73px).
+ */
+/*
+ * Fallback used for SSR / before JS hydration. The SiteHeader component
+ * overwrites this with the exact measured value via ResizeObserver.
+ */
+:root {
+  --site-header-height: 73px;
+}
+
+.hero-section {
+  height: calc(100svh - var(--site-header-height));
+  max-height: calc(100svh - var(--site-header-height));
+}
+
+@supports (height: 100dvh) {
+  .hero-section {
+    height: calc(100dvh - var(--site-header-height));
+    max-height: calc(100dvh - var(--site-header-height));
   }
 }

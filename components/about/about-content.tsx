@@ -1,68 +1,66 @@
 import Image from "next/image";
-import {
-  ChatCircle,
-  Clock,
-  Drop,
-  MapPin,
-  MagnifyingGlass,
-  UsersThree,
-} from "@phosphor-icons/react/ssr";
-import { BookingCta } from "@/components/landing/booking-cta";
+import { Flask } from "@phosphor-icons/react/ssr";
 import { ButtonLink } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
 import { Container } from "@/components/ui/container";
 import { Eyebrow } from "@/components/ui/eyebrow";
-import { aboutMedia } from "@/lib/about/media";
+import { aboutPageMedia } from "@/lib/about/media";
 import { landingMedia } from "@/lib/landing/media";
 
-const howWeWork = [
+const clinicalBullets = [
+  "Micron-level accuracy",
+  "pH-neutral chemistry",
+  "Controlled environment",
+] as const;
+
+const specialists = [
   {
-    icon: MagnifyingGlass,
-    title: "We look before we touch",
-    body: "Your paint, wheels, and interior get a once-over in good light first. That way we’re fixing what’s actually there—not guessing, and not selling you a tier you don’t need.",
+    name: "Marcus Vance",
+    role: "Chief specialist",
+    image: aboutPageMedia.teamLead,
+    alt: "Professional portrait of a lead technician with a focused expression.",
+    offset: false,
   },
   {
-    icon: Drop,
-    title: "Straightforward products",
-    body: "Safe washes, solid protectants, coatings when it makes sense. If you want to know what’s going on the car, ask—we’re happy to talk through it in plain language.",
+    name: "Elara Chen",
+    role: "Surface chemist",
+    image: aboutPageMedia.teamChemist,
+    alt: "Portrait of a chemical specialist looking confident and professional.",
+    offset: true,
   },
   {
-    icon: UsersThree,
-    title: "Same people end to end",
-    body: "Mobile work means we’re on your driveway or in your garage for the whole job. No anonymous handoff halfway through.",
+    name: "Julian Ross",
+    role: "Master polisher",
+    image: aboutPageMedia.teamPolisher,
+    alt: "Portrait of a detailing specialist with a clean, professional look.",
+    offset: false,
+  },
+  {
+    name: "Sarah Lund",
+    role: "Quality control",
+    image: aboutPageMedia.teamQC,
+    alt: "Portrait of a quality control lead in a clean work environment.",
+    offset: true,
   },
 ] as const;
 
-const fieldNotes = [
+const milestones = [
   {
-    src: aboutMedia.labWide,
-    alt: "Clean detailing bay with bright lighting on vehicle panels",
-    caption: "Controlled setup",
-    body: "Enough space, enough light, and a repeatable order of operations so the finish looks even when we’re done.",
+    year: "2018",
+    title: "The genesis",
+    body: "Founded with a simple rule: look at the paint before you touch it—and never promise a miracle in an hour.",
+    reverse: false,
   },
   {
-    src: aboutMedia.labFoam,
-    alt: "Thick wash foam on a wheel during a contact wash",
-    caption: "Wash before polish",
-    body: "Grit and brake dust come off before anything abrasive gets near the paint. Sounds obvious; it’s where a lot of swirls start when it’s skipped.",
-  },
-] as const;
-
-const practicalities = [
-  {
-    icon: MapPin,
-    label: "Where we work",
-    value: "San Diego County, mobile by appointment",
+    year: "2020",
+    title: "Process 1.0",
+    body: "Dialled in our mobile setup: repeatable wash order, controlled lighting checks, and protectants we trust on daily drivers.",
+    reverse: true,
   },
   {
-    icon: Clock,
-    label: "Typical window",
-    value: "Most visits booked in a half- or full-day slot",
-  },
-  {
-    icon: ChatCircle,
-    label: "How to start",
-    value: "Call, text, or use the contact form—we’ll match a package to your car",
+    year: "2024",
+    title: "San Diego standard",
+    body: "Trusted for boringly consistent finishes—clear communication, same crew on site, and coatings when they actually make sense.",
+    reverse: false,
   },
 ] as const;
 
@@ -72,7 +70,10 @@ export function AboutContent() {
       <section className="relative isolate flex min-h-dvh flex-col justify-end overflow-hidden pt-28 pb-16 md:pb-24">
         <div className="pointer-events-none absolute inset-0 z-0" aria-hidden>
           <picture className="absolute inset-0 block size-full">
-            <source media="(min-width: 768px)" srcSet={landingMedia.heroCar} />
+            <source
+              media="(min-width: 768px)"
+              srcSet={landingMedia.sectionWheels}
+            />
             <Image
               src={landingMedia.heroCarMobile}
               alt="JP Auto Detail van and a vehicle being washed on a driveway"
@@ -100,9 +101,10 @@ export function AboutContent() {
               </span>
             </h1>
             <p className="mb-10 max-w-xl text-base font-medium text-slate-200 leading-relaxed md:text-lg">
-              We’re a San Diego crew that shows up with the van, the water, and
-              the patience to do boring prep right. No fake “laboratory” tour—just
-              careful work on daily drivers and weekend cars alike.
+              We&apos;re a San Diego crew that shows up with the van, the water,
+              and the patience to do boring prep right. No fake
+              &quot;laboratory&quot; tour—just careful work on daily drivers and
+              weekend cars alike.
             </p>
             <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
               <ButtonLink variant="heroPrimary" href="/services">
@@ -116,147 +118,219 @@ export function AboutContent() {
         </Container>
       </section>
 
-      <div className="bg-background">
-        <header className="mx-auto pt-24 pb-16">
-          <Container>
-            <div className="flex flex-col justify-between gap-8 md:flex-row md:items-end">
-              <div className="max-w-3xl">
-                <Eyebrow as="span" className="mb-4 block">
-                  How a visit runs
-                </Eyebrow>
-                <h2 className="font-clash text-4xl leading-[0.95] font-bold tracking-tighter text-foreground uppercase sm:text-5xl md:text-6xl">
-                  What you&apos;re actually paying for
-                </h2>
+      <section className="overflow-hidden bg-slate-100 py-24 md:py-32">
+        <Container>
+          <div className="grid grid-cols-1 items-center gap-16 md:grid-cols-2 md:gap-20">
+            <div className="relative">
+              <div className="relative h-[min(600px,70vh)] w-full overflow-hidden rounded-xl md:h-[600px]">
+                <Image
+                  src={aboutPageMedia.clinicalReflection}
+                  alt="Close-up reflection on a coated vehicle in bright, controlled lighting."
+                  fill
+                  className="object-cover grayscale transition-all duration-700 hover:grayscale-0"
+                  sizes="(min-width: 768px) 45vw, 100vw"
+                />
               </div>
-              <p className="max-w-sm text-sm font-medium text-slate-600 leading-relaxed">
-                Three habits that keep us out of trouble on your paint—and keep
-                expectations clear before we turn the pressure washer on.
-              </p>
+              <div
+                className="absolute -bottom-8 -right-8 hidden bg-brand p-10 md:block"
+                aria-hidden
+              >
+                <Flask className="size-14 text-white" weight="fill" />
+              </div>
             </div>
-          </Container>
-        </header>
 
-        <Container className="grid grid-cols-1 items-start gap-16 pb-24 md:grid-cols-2 md:gap-20 lg:pb-32">
-          <div className="space-y-12">
-            {howWeWork.map(({ icon: Icon, title, body }) => (
-              <div key={title} className="flex gap-5">
-                <div className="flex size-12 shrink-0 items-center justify-center rounded-xl bg-white shadow-sm ring-1 ring-slate-200/80">
-                  <Icon
-                    className="size-6 text-brand"
-                    weight="duotone"
-                    aria-hidden
-                  />
+            <div className="flex flex-col gap-8">
+              <h2 className="font-clash text-5xl leading-none font-bold tracking-tighter text-foreground uppercase">
+                Clinical
+                <br />
+                mastery.
+              </h2>
+              <p className="text-lg font-medium text-slate-600 leading-relaxed">
+                Our approach is rooted in chemical precision. Every surface gets
+                a honest read in good light before tools go near it. We treat
+                your vehicle as engineered paint and trim that deserves
+                methodical prep—not a rushed showroom wipe-down.
+              </p>
+              <div className="flex flex-col gap-4 pt-2">
+                {clinicalBullets.map((label) => (
+                  <div key={label} className="flex items-center gap-4">
+                    <span className="h-px w-12 shrink-0 bg-brand" />
+                    <span className="font-sans text-xs font-bold tracking-[0.2em] text-brand uppercase">
+                      {label}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </Container>
+      </section>
+
+      <section className="bg-white py-24 md:py-32">
+        <Container>
+          <div className="mb-14 md:mb-20">
+            <h2 className="font-clash text-5xl font-bold tracking-tighter text-foreground uppercase">
+              The laboratory
+            </h2>
+            <p className="mt-4 font-sans text-sm font-bold tracking-widest text-slate-500 uppercase">
+              Where science meets aesthetics
+            </p>
+          </div>
+
+          <div className="grid h-auto grid-cols-1 gap-6 md:grid-cols-12 md:h-[min(900px,85vh)]">
+            <div className="relative min-h-[280px] md:col-span-8 md:min-h-0">
+              <Image
+                src={aboutPageMedia.labInterior}
+                alt="Bright detailing space with a vehicle being worked on under clean lighting."
+                fill
+                className="rounded-xl object-cover"
+                sizes="(min-width: 768px) 58vw, 100vw"
+              />
+            </div>
+            <div className="grid min-h-[480px] grid-rows-2 gap-6 md:col-span-4 md:min-h-0">
+              <div className="relative min-h-[200px] overflow-hidden rounded-xl md:min-h-0">
+                <Image
+                  src={aboutPageMedia.labBrushes}
+                  alt="Detailing brushes and solutions organized on a tray."
+                  fill
+                  className="object-cover"
+                  sizes="(min-width: 768px) 30vw, 100vw"
+                />
+              </div>
+              <div className="flex flex-col justify-end rounded-xl bg-slate-100 p-8 md:p-10">
+                <p className="font-clash text-xl font-semibold tracking-tight text-foreground leading-tight md:text-2xl md:font-light">
+                  Clean tools, clear steps, and the same order of operations
+                  every visit. That&apos;s the JP Auto Detail standard.
+                </p>
+              </div>
+            </div>
+          </div>
+        </Container>
+      </section>
+
+      <section className="bg-background py-24 md:py-32">
+        <Container>
+          <div className="mb-14 flex flex-col items-start justify-between gap-8 md:mb-20 md:flex-row md:items-end">
+            <h2 className="font-clash text-5xl font-bold tracking-tighter text-foreground uppercase">
+              The
+              <br />
+              specialists
+            </h2>
+            <p className="max-w-md text-sm font-medium text-slate-600 leading-relaxed md:text-base">
+              Our technicians are more than detailers—they&apos;re craftspeople
+              who care about safe chemistry, even lighting, and finishes that
+              hold up after the driveway photos.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 sm:gap-4 lg:grid-cols-4">
+            {specialists.map(({ name, role, image, alt, offset }) => (
+              <div
+                key={name}
+                className={offset ? "mt-12 md:mt-0" : undefined}
+              >
+                <div className="group relative overflow-hidden rounded-xl bg-slate-200">
+                  <div className="relative aspect-3/4 overflow-hidden">
+                    <Image
+                      src={image}
+                      alt={alt}
+                      fill
+                      className="object-cover grayscale transition-transform duration-500 group-hover:scale-105 group-hover:grayscale-0"
+                      sizes="(min-width: 1024px) 22vw, (min-width: 640px) 45vw, 100vw"
+                    />
+                  </div>
                 </div>
-                <div>
-                  <h3 className="mb-2 font-clash text-xl font-bold tracking-tight text-foreground">
-                    {title}
+                <div className="mt-6">
+                  <h3 className="font-clash text-lg font-bold tracking-tight text-foreground uppercase">
+                    {name}
                   </h3>
-                  <p className="text-sm font-medium text-slate-600 leading-relaxed">
-                    {body}
+                  <p className="mt-1 font-sans text-sm font-bold tracking-widest text-brand uppercase">
+                    {role}
                   </p>
                 </div>
               </div>
             ))}
           </div>
-
-          <div className="relative aspect-square w-full max-w-lg justify-self-center md:max-w-none lg:sticky lg:top-32">
-            <Image
-              src="/jp_auto_detail_products.png"
-              alt="JP Auto Detail professional detailing products on display"
-              fill
-              className="rounded-xl object-cover shadow-lg ring-1 ring-slate-200/80"
-              sizes="(min-width: 768px) 45vw, 100vw"
-            />
-          </div>
         </Container>
+      </section>
 
-        <section className="border-slate-200 border-t bg-white py-24 lg:py-32">
-          <Container>
-            <div className="mb-14 md:mb-16">
-              <Eyebrow as="span" size="compact" className="mb-3 block">
-                Field notes
-              </Eyebrow>
-              <h2 className="font-clash text-3xl font-bold tracking-tighter text-foreground uppercase md:text-4xl">
-                On the job
-              </h2>
-              <p className="mt-4 max-w-2xl text-sm font-medium text-slate-600 leading-relaxed">
-                Two photos, two things we refuse to rush. Hover states are fun;
-                labels you can read without a mouse are better.
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 gap-10 md:grid-cols-2 md:gap-8">
-              {fieldNotes.map(({ src, alt, caption, body }) => (
-                <figure key={caption} className="m-0">
-                  <div className="relative aspect-[4/3] overflow-hidden rounded-xl bg-slate-200 shadow-sm ring-1 ring-slate-200/80">
-                    <Image
-                      src={src}
-                      alt={alt}
-                      fill
-                      className="object-cover"
-                      sizes="(min-width: 768px) 45vw, 100vw"
-                    />
-                  </div>
-                  <figcaption className="mt-5">
-                    <p className="mb-2 font-sans text-xs font-bold text-brand uppercase tracking-widest">
-                      {caption}
-                    </p>
-                    <p className="text-sm font-medium text-slate-600 leading-relaxed">
-                      {body}
-                    </p>
-                  </figcaption>
-                </figure>
-              ))}
-            </div>
-          </Container>
-        </section>
-
-        <section className="py-24 lg:py-32">
-          <Container>
-            <h2 className="mb-10 font-clash text-2xl font-bold tracking-tight text-foreground md:text-3xl">
-              Practical stuff
+      <section className="bg-slate-950 py-24 text-white md:py-32">
+        <Container>
+          <div className="max-w-4xl">
+            <h2 className="mb-14 font-clash text-5xl font-bold tracking-tighter uppercase md:mb-20">
+              Our evolution
             </h2>
-            <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
-              {practicalities.map(({ icon: Icon, label, value }) => (
-                <Card key={label} className="p-6">
-                  <Icon
-                    className="mb-4 size-8 text-brand"
-                    weight="duotone"
+            <div className="relative space-y-20 md:space-y-24">
+              <div
+                className="absolute top-0 bottom-0 left-4 ml-0 w-px bg-white/10 md:left-1/2 md:-translate-x-1/2"
+                aria-hidden
+              />
+
+              {milestones.map(({ year, title, body, reverse }) => (
+                <div
+                  key={year}
+                  className={`relative flex flex-col items-start md:flex-row md:items-center md:justify-between ${
+                    reverse ? "md:flex-row-reverse" : ""
+                  }`}
+                >
+                  <div
+                    className={`mb-6 hidden w-[45%] md:mb-0 md:block ${
+                      reverse ? "text-left" : "text-right"
+                    }`}
+                  >
+                    <span className="font-clash text-5xl leading-none font-bold tracking-tighter text-white/20 md:text-6xl">
+                      {year}
+                    </span>
+                  </div>
+                  <div
+                    className="absolute top-1/2 left-4 z-10 size-3 -translate-x-1/2 -translate-y-1/2 rounded-full bg-brand md:left-1/2"
                     aria-hidden
                   />
-                  <p className="mb-1 font-sans text-xs font-bold text-slate-500 uppercase tracking-widest">
-                    {label}
-                  </p>
-                  <p className="font-clash text-lg font-bold text-foreground leading-snug">
-                    {value}
-                  </p>
-                </Card>
+                  <div
+                    className={`w-full pl-10 md:w-[45%] md:pl-0 ${
+                      reverse ? "md:text-right" : ""
+                    }`}
+                  >
+                    <span className="mb-2 block font-sans text-xl font-bold md:hidden">
+                      {year}
+                    </span>
+                    <h3 className="mb-3 font-clash text-xl font-bold tracking-tight uppercase md:text-2xl">
+                      {title}
+                    </h3>
+                    <p className="text-sm font-medium text-white/60 leading-relaxed md:text-base md:font-light">
+                      {body}
+                    </p>
+                  </div>
+                </div>
               ))}
             </div>
-          </Container>
-        </section>
+          </div>
+        </Container>
+      </section>
 
-        <section className="pb-24 lg:pb-32">
-          <Container>
-            <Card className="p-10 md:p-12">
-              <p className="mb-6 font-sans text-xs font-bold text-brand uppercase tracking-widest">
-                From the crew
-              </p>
-              <blockquote className="font-clash text-2xl font-bold tracking-tight text-foreground leading-snug md:text-3xl">
-                We&apos;d rather turn down a job than promise a one-hour miracle
-                on paint that needs real time. Most of our clients stick around
-                because we&apos;re boringly consistent—not because we have the
-                loudest Instagram.
-              </blockquote>
-              <p className="mt-8 text-sm font-medium text-slate-500">
-                — JP Auto Detail
-              </p>
-            </Card>
-          </Container>
-        </section>
-      </div>
-
-      <BookingCta />
+      <section className="relative isolate min-h-[560px] overflow-hidden md:h-[min(819px,90vh)]">
+        <Image
+          src={aboutPageMedia.ctaHeadlight}
+          alt="Headlight with water beading on a ceramic-coated surface in dramatic light."
+          fill
+          className="object-cover"
+          sizes="100vw"
+        />
+        <div className="absolute inset-0 flex flex-col items-center justify-center bg-slate-950/50 p-8 text-center backdrop-blur-sm">
+          <h2 className="max-w-4xl font-clash text-5xl leading-[0.9] font-bold tracking-tighter text-white uppercase sm:text-6xl md:text-7xl lg:text-8xl">
+            Experience
+            <br />
+            precision
+          </h2>
+          <ButtonLink
+            variant="heroPrimary"
+            href="/contact"
+            className="mt-10 bg-white text-foreground hover:scale-100 hover:bg-brand hover:text-on-brand md:mt-12"
+          >
+            Reserve your appointment
+          </ButtonLink>
+        </div>
+      </section>
     </>
   );
 }
