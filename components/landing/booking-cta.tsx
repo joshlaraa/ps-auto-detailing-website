@@ -1,6 +1,7 @@
 import { ButtonLink } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
 import { Eyebrow } from "@/components/ui/eyebrow";
+import { Reveal } from "@/components/ui/reveal";
 
 export function BookingCta() {
   return (
@@ -17,7 +18,7 @@ export function BookingCta() {
         aria-hidden
       />
       <Container>
-        <div className="mx-auto flex max-w-4xl flex-col items-center text-center">
+        <Reveal className="mx-auto flex max-w-4xl flex-col items-center text-center">
           <Eyebrow as="p" tone="onDark" className="mb-5 block">
             Mobile Auto Detailing
           </Eyebrow>
@@ -33,7 +34,7 @@ export function BookingCta() {
           <ButtonLink variant="heroPrimary" href="/contact" className="mt-10">
             Book mobile service
           </ButtonLink>
-        </div>
+        </Reveal>
       </Container>
     </section>
   );

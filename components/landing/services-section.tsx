@@ -3,6 +3,7 @@ import { BookingCta } from "@/components/landing/booking-cta";
 import { ButtonLink } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
 import { Eyebrow } from "@/components/ui/eyebrow";
+import { Reveal } from "@/components/ui/reveal";
 import { landingMedia } from "@/lib/landing/media";
 import { servicesPageMedia } from "@/lib/services/media";
 
@@ -148,7 +149,7 @@ export function ServicesSection() {
         </div>
 
         <Container className="relative z-10 flex min-h-dvh items-center py-16 md:py-24">
-          <div className="w-full max-w-3xl">
+          <Reveal className="w-full max-w-3xl">
             <div className="mb-5 flex items-center gap-4 md:mb-6">
               <span className="h-px w-12 shrink-0 bg-brand" aria-hidden />
               <Eyebrow as="span" tone="onDark" size="compact" className="block">
@@ -174,7 +175,7 @@ export function ServicesSection() {
                 View add-ons
               </ButtonLink>
             </div>
-          </div>
+          </Reveal>
         </Container>
       </section>
 
@@ -184,11 +185,11 @@ export function ServicesSection() {
             Core Service Tiers
           </h2>
           <div className="mb-14 h-1 w-24 bg-brand md:mb-16" />
-          <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-4">
+          <Reveal className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-4">
             {tiers.map((tier) => (
               <div
                 key={tier.index}
-                className={`group bg-slate-50 p-8 transition-colors duration-500 hover:bg-brand md:p-10 ${
+                className={`group bg-slate-50 p-8 transition-colors duration-500 md:hover:bg-brand group-active:bg-brand md:p-10 ${
                   tier.featured ? "relative" : ""
                 }`}
               >
@@ -197,35 +198,35 @@ export function ServicesSection() {
                     Most booked
                   </div>
                 ) : null}
-                <div className="mb-8 font-clash text-4xl font-bold text-slate-300 transition-colors duration-500 group-hover:text-blue-100">
+                <div className="mb-8 font-clash text-4xl font-bold text-slate-300 transition-colors duration-500 md:group-hover:text-blue-100 group-active:text-blue-100">
                   {tier.index}
                 </div>
-                <h3 className="mb-3 font-clash text-3xl font-bold tracking-tight text-foreground uppercase transition-colors duration-500 group-hover:text-white">
+                <h3 className="mb-3 font-clash text-3xl font-bold tracking-tight text-foreground uppercase transition-colors duration-500 md:group-hover:text-white group-active:text-white">
                   {tier.title}
                 </h3>
-                <p className="mb-8 min-h-[4.5rem] text-sm font-medium text-slate-600 transition-colors duration-500 group-hover:text-blue-100/80">
+                <p className="mb-8 min-h-[4.5rem] text-sm font-medium text-slate-600 transition-colors duration-500 md:group-hover:text-blue-100/80 group-active:text-blue-100/80">
                   {tier.description}
                 </p>
-                <div className="mt-auto border-slate-200 border-t pt-8 transition-colors duration-500 group-hover:border-blue-200/40">
+                <div className="mt-auto border-slate-200 border-t pt-8 transition-colors duration-500 md:group-hover:border-blue-200/40 group-active:border-blue-200/40">
                   <div className="mb-6 flex flex-col gap-2">
                     <div className="flex items-center justify-between text-[10px] font-bold tracking-widest uppercase">
-                      <span className="text-slate-400 transition-colors duration-500 group-hover:text-blue-200">
+                      <span className="text-slate-400 transition-colors duration-500 md:group-hover:text-blue-200 group-active:text-blue-200">
                         Time
                       </span>
-                      <span className="text-foreground transition-colors duration-500 group-hover:text-white">
+                      <span className="text-foreground transition-colors duration-500 md:group-hover:text-white group-active:text-white">
                         {tier.time.replace(" hours", "H")}
                       </span>
                     </div>
                     <div className="flex items-center justify-between text-[10px] font-bold tracking-widest uppercase">
-                      <span className="text-slate-400 transition-colors duration-500 group-hover:text-blue-200">
+                      <span className="text-slate-400 transition-colors duration-500 md:group-hover:text-blue-200 group-active:text-blue-200">
                         Finish
                       </span>
-                      <span className="text-foreground transition-colors duration-500 group-hover:text-white">
+                      <span className="text-foreground transition-colors duration-500 md:group-hover:text-white group-active:text-white">
                         {tier.protection}
                       </span>
                     </div>
                   </div>
-                  <span className="inline-flex items-center font-clash text-sm font-bold text-brand transition-colors duration-500 group-hover:text-white">
+                  <span className="inline-flex items-center font-clash text-sm font-bold text-brand transition-colors duration-500 md:group-hover:text-white group-active:text-white">
                     Learn more
                     <span aria-hidden className="ml-2">
                       &rarr;
@@ -234,7 +235,7 @@ export function ServicesSection() {
                 </div>
               </div>
             ))}
-          </div>
+          </Reveal>
         </Container>
       </section>
 
@@ -316,14 +317,14 @@ export function ServicesSection() {
           <h2 className="mb-14 font-clash text-5xl font-bold tracking-tighter text-foreground uppercase md:mb-16">
             Surgical Add-Ons
           </h2>
-          <div className="grid grid-cols-1 gap-1 md:grid-cols-3">
+          <Reveal className="grid grid-cols-1 gap-1 md:grid-cols-3">
             {addOnGallery.map((item) => (
               <div key={item.title} className="group relative aspect-square overflow-hidden">
                 <Image
                   src={item.image}
                   alt={`Placeholder image representing ${item.title.toLowerCase()}.`}
                   fill
-                  className="object-cover transition-transform duration-700 group-hover:scale-110"
+                  className="object-cover transition-transform duration-700 md:group-hover:scale-110 group-active:scale-110"
                   sizes="(min-width: 768px) 33vw, 100vw"
                 />
                 <div className="absolute inset-0 bg-linear-to-t from-black/80 to-transparent p-8" />
@@ -337,7 +338,7 @@ export function ServicesSection() {
                 </div>
               </div>
             ))}
-          </div>
+          </Reveal>
         </Container>
       </section>
 

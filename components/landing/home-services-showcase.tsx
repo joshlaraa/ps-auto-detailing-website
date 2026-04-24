@@ -3,6 +3,7 @@ import Link from "next/link";
 import { ArrowRight, CalendarBlank } from "@phosphor-icons/react/ssr";
 import { ButtonLink, buttonStyles } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
+import { Reveal } from "@/components/ui/reveal";
 import { landingMedia } from "@/lib/landing/media";
 
 const serviceTiles = [
@@ -53,7 +54,7 @@ export function HomeServicesShowcase() {
     <>
       <section id="technique" className="bg-white py-24 md:py-32">
         <Container>
-          <div className="mb-14 md:mb-20">
+          <Reveal className="mb-14 md:mb-20">
             <h2 className="relative mb-4 inline-block font-clash text-5xl font-bold tracking-tighter text-foreground uppercase lg:text-6xl">
               San Diego County auto detailing services
               <span
@@ -75,9 +76,9 @@ export function HomeServicesShowcase() {
                 />
               </ButtonLink>
             </div>
-          </div>
+          </Reveal>
 
-          <div className="grid grid-cols-1 gap-px bg-slate-200 md:grid-cols-2 lg:grid-cols-3">
+          <Reveal className="grid grid-cols-1 gap-px bg-slate-200 md:grid-cols-2 lg:grid-cols-3" delay={0.1}>
             {serviceTiles.map(({ key, title, hint, href, image, alt }) => (
               <Link
                 key={key}
@@ -88,7 +89,7 @@ export function HomeServicesShowcase() {
                   src={image}
                   alt={alt}
                   fill
-                  className="object-cover transition-transform duration-700 group-hover:scale-110"
+                  className="object-cover transition-transform duration-700 md:group-hover:scale-110 group-active:scale-110"
                   sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
                 />
                 <div className="absolute inset-0 bg-linear-to-t from-slate-950/90 via-slate-950/20 to-transparent" />
@@ -101,7 +102,7 @@ export function HomeServicesShowcase() {
                       {hint}
                     </span>
                     <ArrowRight
-                      className="size-4 transition-transform duration-300 group-hover:translate-x-1"
+                      className="size-4 transition-transform duration-300 md:group-hover:translate-x-1 group-active:translate-x-1"
                       weight="bold"
                       aria-hidden
                     />
@@ -118,7 +119,7 @@ export function HomeServicesShowcase() {
                 src={landingMedia.homeServiceBook}
                 alt="Carbon fiber texture with blue ambient light."
                 fill
-                className="object-cover transition-transform duration-700 group-hover:scale-110"
+                className="object-cover transition-transform duration-700 md:group-hover:scale-110 group-active:scale-110"
                 sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
               />
               <div className="absolute inset-0 bg-brand/80 mix-blend-multiply" />
@@ -137,14 +138,14 @@ export function HomeServicesShowcase() {
                 <span
                   className={
                     buttonStyles.heroPrimary +
-                    " !bg-white !text-brand shadow-lg shadow-black/20 group-hover:!bg-slate-100 hover:scale-100"
+                    " !bg-white !text-brand shadow-lg shadow-black/20 md:group-hover:!bg-slate-100 group-active:!bg-slate-100 md:hover:scale-100"
                   }
                 >
                   Select slot
                 </span>
               </div>
             </Link>
-          </div>
+          </Reveal>
         </Container>
       </section>
     </>

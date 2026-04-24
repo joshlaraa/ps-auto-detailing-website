@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { buttonStyles } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
+import { Reveal } from "@/components/ui/reveal";
 import { cn } from "@/lib/cn";
 
 type PlanLine = { text: string; strike?: boolean };
@@ -81,7 +82,7 @@ export function PricingSection() {
                 toggleBtn,
                 mode === "one-time"
                   ? "bg-brand text-on-brand"
-                  : "text-slate-500 hover:text-foreground",
+                  : "text-slate-500 md:hover:text-foreground active:text-foreground",
               )}
             >
               ONE-TIME
@@ -94,7 +95,7 @@ export function PricingSection() {
                 toggleBtn,
                 mode === "subscription"
                   ? "bg-brand text-on-brand"
-                  : "text-slate-500 hover:text-foreground",
+                  : "text-slate-500 md:hover:text-foreground active:text-foreground",
               )}
             >
               SUBSCRIPTION
@@ -107,7 +108,7 @@ export function PricingSection() {
             </p>
           ) : null}
         </div>
-        <div className="grid grid-cols-1 gap-12 md:grid-cols-3">
+        <Reveal className="grid grid-cols-1 gap-12 md:grid-cols-3" delay={0.1}>
           {plansOneTime.map((plan) => (
             <div
               key={plan.badge}
@@ -160,7 +161,7 @@ export function PricingSection() {
               )}
             </div>
           ))}
-        </div>
+        </Reveal>
       </Container>
     </section>
   );

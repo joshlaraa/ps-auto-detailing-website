@@ -6,16 +6,19 @@ import {
   CompassRose,
 } from "@phosphor-icons/react/ssr";
 import { Container } from "@/components/ui/container";
+import { Reveal } from "@/components/ui/reveal";
 import { landingMedia } from "@/lib/landing/media";
 
 export function AnatomySection() {
   return (
     <section className="bg-white py-24 md:py-32">
       <Container>
-        <h2 className="mb-24 font-clash text-5xl font-bold tracking-tighter text-foreground uppercase">
-          Coverage <span className="text-brand">Areas</span>
-        </h2>
-        <div className="grid h-auto grid-cols-1 gap-6 md:h-[800px] md:grid-cols-4 md:grid-rows-2">
+        <Reveal>
+          <h2 className="mb-24 font-clash text-5xl font-bold tracking-tighter text-foreground uppercase">
+            Coverage <span className="text-brand">Areas</span>
+          </h2>
+        </Reveal>
+        <Reveal className="grid h-auto grid-cols-1 gap-6 md:h-[800px] md:grid-cols-4 md:grid-rows-2" delay={0.1}>
           <div className="group relative flex flex-col justify-end overflow-hidden bg-slate-900 p-12 md:col-span-2 md:row-span-2">
             <picture className="absolute inset-0 block size-full">
               <source media="(min-width: 768px)" srcSet={landingMedia.anatomySdCounty} />
@@ -23,7 +26,7 @@ export function AnatomySection() {
                 src={landingMedia.anatomySdCountyMobile}
                 alt="Aerial view of San Diego County"
                 fill
-                className="object-cover opacity-60 grayscale-[0.3] transition-transform duration-1000 ease-out scale-110 group-hover:scale-100"
+                className="scale-110 object-cover opacity-60 grayscale-[0.3] transition-transform duration-1000 ease-out md:group-hover:scale-100 group-active:scale-100"
                 sizes="(min-width: 768px) 50vw, 100vw"
               />
             </picture>
@@ -33,7 +36,7 @@ export function AnatomySection() {
                 San Diego County
               </h3>
               <p className="mb-8 max-w-sm font-medium text-slate-300">
-                We bring professional mobile detailing directly to your door —
+                We bring professional mobile detailing directly to your door -
                 wherever you are in the county. No drop-off, no hassle.
               </p>
               <MapTrifold
@@ -50,7 +53,7 @@ export function AnatomySection() {
                 src={landingMedia.anatomyCoastalMobile}
                 alt="San Diego coastal communities"
                 fill
-                className="object-cover opacity-50 grayscale-[0.3] transition-transform duration-1000 ease-out scale-110 group-hover:scale-100"
+                className="scale-110 object-cover opacity-50 grayscale-[0.3] transition-transform duration-1000 ease-out md:group-hover:scale-100 group-active:scale-100"
                 sizes="(min-width: 768px) 50vw, 100vw"
               />
             </picture>
@@ -77,7 +80,7 @@ export function AnatomySection() {
                 src={landingMedia.anatomyInlandMobile}
                 alt="San Diego inland communities"
                 fill
-                className="object-cover opacity-50 grayscale-[0.3] transition-transform duration-1000 ease-out scale-110 group-hover:scale-100"
+                className="scale-110 object-cover opacity-50 grayscale-[0.3] transition-transform duration-1000 ease-out md:group-hover:scale-100 group-active:scale-100"
                 sizes="(min-width: 768px) 25vw, 100vw"
               />
             </picture>
@@ -101,7 +104,7 @@ export function AnatomySection() {
                 src={landingMedia.anatomyOutskirtsMobile}
                 alt="San Diego county outskirts"
                 fill
-                className="object-cover opacity-50 grayscale-[0.3] transition-transform duration-1000 ease-out scale-110 group-hover:scale-100"
+                className="scale-110 object-cover opacity-50 grayscale-[0.3] transition-transform duration-1000 ease-out md:group-hover:scale-100 group-active:scale-100"
                 sizes="(min-width: 768px) 25vw, 100vw"
               />
             </picture>
@@ -118,7 +121,7 @@ export function AnatomySection() {
               Temecula, Ramona, Alpine, and surrounding communities.
             </p>
           </div>
-        </div>
+        </Reveal>
       </Container>
     </section>
   );

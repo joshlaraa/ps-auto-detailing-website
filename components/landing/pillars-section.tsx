@@ -1,5 +1,6 @@
 import { Handshake, MapPin, Sparkle } from "@phosphor-icons/react/ssr";
 import { Container } from "@/components/ui/container";
+import { Reveal } from "@/components/ui/reveal";
 
 const features = [
   {
@@ -23,14 +24,14 @@ export function PillarsSection() {
   return (
     <section className="bg-background py-24 md:py-32">
       <Container>
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 xl:grid-cols-3">
+        <Reveal className="grid grid-cols-1 gap-8 md:grid-cols-2 xl:grid-cols-3">
           {features.map(({ icon: Icon, title, body }) => (
             <div
               key={title}
-              className="group rounded-xl border border-slate-200/80 bg-white p-10 shadow-sm transition-all hover:shadow-md"
+              className="group rounded-xl border border-slate-200/80 bg-white p-10 shadow-sm transition-all md:hover:shadow-md group-active:shadow-md"
             >
               <Icon
-                className="mb-6 size-10 text-brand transition-transform group-hover:scale-110 md:size-11"
+                className="mb-6 size-10 text-brand transition-transform md:group-hover:scale-110 group-active:scale-110 md:size-11"
                 weight="duotone"
                 aria-hidden
               />
@@ -42,7 +43,7 @@ export function PillarsSection() {
               </p>
             </div>
           ))}
-        </div>
+        </Reveal>
       </Container>
     </section>
   );

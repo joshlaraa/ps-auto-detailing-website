@@ -17,7 +17,7 @@ export function Card({
     <div
       className={cn(
         "rounded-xl border border-slate-200/80 bg-white shadow-sm ring-1 ring-slate-200/80",
-        hover && "transition-colors duration-500 hover:bg-white",
+        hover && "transition-colors duration-500 md:hover:bg-white active:bg-white",
         className,
       )}
       {...props}

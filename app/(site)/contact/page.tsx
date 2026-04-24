@@ -15,6 +15,7 @@ import { ContactInquiryForm } from "@/components/contact/contact-inquiry-form";
 import { Card } from "@/components/ui/card";
 import { Container } from "@/components/ui/container";
 import { Eyebrow } from "@/components/ui/eyebrow";
+import { Reveal } from "@/components/ui/reveal";
 import { cn } from "@/lib/cn";
 import { siteContact } from "@/lib/site/contact";
 
@@ -58,7 +59,7 @@ const facilitySpecs = [
 ] as const;
 
 const linkUnderline =
-  "underline-offset-4 transition-colors duration-200 hover:text-brand hover:underline";
+  "underline-offset-4 transition-colors duration-200 md:hover:text-brand md:hover:underline active:text-brand active:underline";
 
 export const metadata: Metadata = {
   title: "Contact | JP AUTO DETAIL",
@@ -72,7 +73,7 @@ export default function ContactPage() {
       <div className="bg-background pt-32 pb-24 md:pt-36 md:pb-32">
         <header className="mb-24">
           <Container>
-            <div className="flex flex-col justify-between gap-8 md:flex-row md:items-end">
+            <Reveal className="flex flex-col justify-between gap-8 md:flex-row md:items-end">
               <div className="max-w-3xl">
                 <Eyebrow className="mb-4 block">Contact Us</Eyebrow>
                 <h1 className="font-clash text-5xl leading-[0.9] font-bold tracking-tighter text-foreground uppercase sm:text-6xl md:text-7xl lg:text-8xl">
@@ -85,12 +86,12 @@ export default function ContactPage() {
                   today!
                 </p>
               </div>
-            </div>
+            </Reveal>
           </Container>
         </header>
 
         <Container>
-          <div className="grid grid-cols-1 gap-12 lg:grid-cols-12">
+          <Reveal className="grid grid-cols-1 gap-12 lg:grid-cols-12" delay={0.06}>
             <Card className="p-10 lg:col-span-7">
               <div className="mb-10">
                 <h2 className="mb-2 font-clash text-2xl font-bold tracking-tight text-foreground uppercase">
@@ -193,7 +194,7 @@ export default function ContactPage() {
                     href={siteContact.coverageMapHref}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="mt-8 inline-flex items-center gap-2 font-sans text-xs font-bold text-brand uppercase tracking-widest transition-all duration-200 group-hover:gap-3"
+                  className="mt-8 inline-flex items-center gap-2 font-sans text-xs font-bold text-brand uppercase tracking-widest transition-all duration-200 md:group-hover:gap-3 group-active:gap-3"
                   >
                     Coverage map
                     <ArrowRight className="size-4" weight="bold" aria-hidden />
@@ -206,7 +207,7 @@ export default function ContactPage() {
                   {serviceFootprintSprays.map(({ className }, i) => (
                     <SprayBottle
                       key={i}
-                      className={`absolute opacity-[0.05] transition-opacity duration-200 group-hover:opacity-[0.09] ${className}`}
+                      className={`absolute opacity-[0.05] transition-opacity duration-200 md:group-hover:opacity-[0.09] group-active:opacity-[0.09] ${className}`}
                       weight="duotone"
                     />
                   ))}
@@ -224,7 +225,7 @@ export default function ContactPage() {
                 />
               </div>
             </aside>
-          </div>
+          </Reveal>
         </Container>
 
         <Container className="mt-24">
@@ -232,7 +233,7 @@ export default function ContactPage() {
         </Container>
 
         <Container className="mt-24">
-          <div className="grid grid-cols-1 gap-4 md:grid-cols-4">
+          <Reveal className="grid grid-cols-1 gap-4 md:grid-cols-4" delay={0.08}>
             {facilitySpecs.map(({ icon: Icon, label, value }) => (
               <Card key={label} className="p-6">
                 <Icon
@@ -248,7 +249,7 @@ export default function ContactPage() {
                 </p>
               </Card>
             ))}
-          </div>
+          </Reveal>
         </Container>
       </div>
       <BookingCta />

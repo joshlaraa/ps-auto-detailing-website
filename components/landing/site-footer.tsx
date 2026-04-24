@@ -1,22 +1,23 @@
 import Link from "next/link";
 import { Envelope, Globe, Phone } from "@phosphor-icons/react/ssr";
 import { Container } from "@/components/ui/container";
+import { Reveal } from "@/components/ui/reveal";
 import { cn } from "@/lib/cn";
 import { siteContact } from "@/lib/site/contact";
 
 const footerLinkClass = cn(
-  "cursor-pointer text-slate-500 underline-offset-4 transition-colors duration-200 hover:text-brand hover:underline",
+  "cursor-pointer text-slate-500 underline-offset-4 transition-colors duration-200 md:hover:text-brand md:hover:underline active:text-brand active:underline",
 );
 
 const iconLinkClass =
-  "cursor-pointer text-slate-400 transition-colors duration-200 hover:text-brand";
+  "cursor-pointer text-slate-400 transition-colors duration-200 md:hover:text-brand active:text-brand";
 
 export function SiteFooter() {
   return (
     <footer className="w-full border-slate-200/50 border-t bg-background">
-      <Container className="grid grid-cols-1 gap-12 py-16 md:grid-cols-4">
+      <Reveal className="grid grid-cols-1 gap-12 py-16 md:grid-cols-4" delay={0.05}>
         <div className="group">
-          <div className="mb-6 inline-block font-clash text-xl leading-[0.9] font-bold tracking-tighter text-foreground uppercase transition-transform duration-200 ease-out group-hover:scale-[1.02]">
+          <div className="mb-6 inline-block font-clash text-xl leading-[0.9] font-bold tracking-tighter text-foreground uppercase transition-transform duration-200 ease-out md:group-hover:scale-[1.02] group-active:scale-[1.02]">
             JP AUTO DETAIL
           </div>
           <p className="max-w-xs text-sm font-medium text-slate-500 leading-relaxed">
@@ -88,7 +89,7 @@ export function SiteFooter() {
             </a>
           </div>
         </div>
-      </Container>
+      </Reveal>
       <div className="border-slate-200/50 border-t bg-slate-100 py-8">
         <Container className="flex flex-col items-center justify-between gap-4 md:flex-row">
           <div className="font-sans text-sm text-slate-500 uppercase tracking-widest">

@@ -2,6 +2,7 @@ import Image from "next/image";
 import { ButtonLink } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
 import { Eyebrow } from "@/components/ui/eyebrow";
+import { Reveal } from "@/components/ui/reveal";
 import { aboutPageMedia } from "@/lib/about/media";
 import { landingMedia } from "@/lib/landing/media";
 
@@ -51,7 +52,7 @@ export function AboutContent() {
         </div>
 
         <Container className="relative z-10 flex min-h-dvh items-center py-16 md:py-24">
-          <div className="w-full max-w-3xl">
+          <Reveal className="w-full max-w-3xl">
             <div className="mb-5 flex items-center gap-4 md:mb-6">
               <span className="h-px w-12 shrink-0 bg-brand" aria-hidden />
               <Eyebrow as="span" tone="onDark" size="compact" className="block">
@@ -77,20 +78,20 @@ export function AboutContent() {
                 Get a quote
               </ButtonLink>
             </div>
-          </div>
+          </Reveal>
         </Container>
       </section>
 
       <section className="overflow-hidden bg-slate-100 py-24 md:py-32">
         <Container>
-          <div className="grid grid-cols-1 items-center gap-16 md:grid-cols-2 md:gap-20">
+          <Reveal className="grid grid-cols-1 items-center gap-16 md:grid-cols-2 md:gap-20">
             <div className="relative">
               <div className="relative h-[min(600px,70vh)] w-full overflow-hidden rounded-xl md:h-[600px]">
                 <Image
                   src={aboutPageMedia.clinicalReflection}
                   alt="Placeholder image representing mobile auto detailing workflow."
                   fill
-                  className="object-cover grayscale transition-all duration-700 hover:grayscale-0"
+                  className="object-cover grayscale transition-all duration-700 md:hover:grayscale-0 active:grayscale-0"
                   sizes="(min-width: 768px) 45vw, 100vw"
                 />
               </div>
@@ -118,7 +119,7 @@ export function AboutContent() {
                 ))}
               </div>
             </div>
-          </div>
+          </Reveal>
         </Container>
       </section>
 

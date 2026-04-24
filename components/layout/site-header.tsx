@@ -62,11 +62,12 @@ function NavLink({
     <Link
       href={href}
       onClick={onNavigate}
-      className="group relative px-1 py-2 font-sans text-xs font-bold tracking-[0.2em] text-slate-600 uppercase transition-colors duration-200 hover:text-foreground"
+      className="group relative px-1 py-2 font-sans text-xs font-bold tracking-[0.2em] text-slate-600 uppercase transition-colors duration-200 md:hover:text-foreground active:text-foreground"
     >
       <motion.span
         className="relative z-10 inline-block"
         whileHover={{ y: -2 }}
+        whileTap={{ y: -1 }}
         transition={{ type: "spring", stiffness: 500, damping: 26 }}
       >
         {label}
@@ -75,7 +76,7 @@ function NavLink({
         className="pointer-events-none absolute inset-x-0 bottom-0 h-px overflow-hidden rounded-full bg-slate-200"
         aria-hidden
       >
-        <span className="block h-full w-full origin-left scale-x-0 bg-brand/35 transition-transform duration-300 ease-out group-hover:scale-x-100" />
+        <span className="block h-full w-full origin-left scale-x-0 bg-brand/35 transition-transform duration-300 ease-out md:group-hover:scale-x-100 group-active:scale-x-100" />
       </span>
       {active ? (
         <motion.span

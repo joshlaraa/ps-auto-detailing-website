@@ -3,6 +3,7 @@ import { Star } from "@phosphor-icons/react/ssr";
 import { Card } from "@/components/ui/card";
 import { Container } from "@/components/ui/container";
 import { Eyebrow } from "@/components/ui/eyebrow";
+import { Reveal } from "@/components/ui/reveal";
 
 const testimonials: readonly { quote: ReactNode; author: string }[] = [
   {
@@ -66,12 +67,12 @@ export function TestimonialsSection() {
         aria-hidden
       />
       <Container>
-        <div className="mb-12 flex items-center gap-4 md:mb-14 md:gap-6">
+        <Reveal className="mb-12 flex items-center gap-4 md:mb-14 md:gap-6">
           <Eyebrow as="p" tone="onDark" className="shrink-0 text-white">
             Testimonials
           </Eyebrow>
           <span className="h-px flex-1 bg-white/20" aria-hidden />
-        </div>
+        </Reveal>
       </Container>
 
       <div className="overflow-hidden px-6 md:px-8">

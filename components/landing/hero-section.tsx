@@ -3,6 +3,7 @@ import { CalendarBlank, Star } from "@phosphor-icons/react/ssr";
 import { Container } from "@/components/ui/container";
 import { Eyebrow } from "@/components/ui/eyebrow";
 import { ButtonLink } from "@/components/ui/button";
+import { Reveal } from "@/components/ui/reveal";
 import { landingMedia } from "@/lib/landing/media";
 
 export function HeroSection() {
@@ -26,7 +27,7 @@ export function HeroSection() {
       </div>
 
       <Container className="relative z-10 flex flex-1 items-center py-16 md:py-24">
-        <div className="w-full max-w-3xl">
+        <Reveal className="w-full max-w-3xl">
           <div className="mb-5 flex items-center gap-4 md:mb-6">
             <span className="h-px w-12 shrink-0 bg-brand" aria-hidden />
             <Eyebrow
@@ -62,13 +63,14 @@ export function HeroSection() {
               Book Now
             </ButtonLink>
           </div>
-        </div>
+        </Reveal>
       </Container>
 
       <Container className="relative z-10 shrink-0 pb-[max(1.25rem,env(safe-area-inset-bottom))] pt-2">
-        <div
+        <Reveal
           className="pointer-events-none ml-auto grid max-w-xs grid-cols-2 gap-6 sm:max-w-sm sm:gap-8"
           aria-hidden
+          delay={0.15}
         >
           <div className="border-l border-white pl-4">
             <div className="mb-0.5 font-sans text-[10px] font-bold uppercase tracking-widest text-white">
@@ -96,7 +98,7 @@ export function HeroSection() {
               />
             </div>
           </div>
-        </div>
+        </Reveal>
       </Container>
     </section>
   );
