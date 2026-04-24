@@ -1,14 +1,17 @@
 "use client";
 
-import type { HTMLAttributes, ReactNode } from "react";
-import { motion, useReducedMotion } from "framer-motion";
+import type { ReactNode } from "react";
+import { motion, useReducedMotion, type HTMLMotionProps } from "framer-motion";
 import { cn } from "@/lib/cn";
 
 type RevealProps = {
   children: ReactNode;
   delay?: number;
   y?: number;
-} & HTMLAttributes<HTMLDivElement>;
+} & Omit<
+  HTMLMotionProps<"div">,
+  "children" | "initial" | "whileInView" | "viewport" | "transition"
+>;
 
 export function Reveal({
   children,
@@ -19,22 +22,14 @@ export function Reveal({
 }: RevealProps) {
   const prefersReducedMotion = useReducedMotion();
 
-  if (prefersReducedMotion) {
-    return (
-      <div className={className} {...props}>
-        {children}
-      </div>
-    );
-  }
-
   return (
     <motion.div
       className={className}
       {...props}
-      initial={{ opacity: 0, y }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.15 }}
-      transition={{ duration: 0.5, ease: "easeOut", delay }}
+      initial={prefersReducedMotion ? false : { opacity: 0, y }}
+      whileInView={prefersReducedMotion ? undefined : { opacity: 1, y: 0 }}
+      viewport={prefersReducedMotion ? undefined : { once: true, amount: 0.15 }}
+      transition={prefersReducedMotion ? undefined : { duration: 0.5, ease: "easeOut", delay }}
     >
       {children}
     </motion.div>
