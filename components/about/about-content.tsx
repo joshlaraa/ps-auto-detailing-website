@@ -1,5 +1,4 @@
 import Image from "next/image";
-import { Flask } from "@phosphor-icons/react/ssr";
 import { ButtonLink } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
 import { Eyebrow } from "@/components/ui/eyebrow";
@@ -7,67 +6,30 @@ import { aboutPageMedia } from "@/lib/about/media";
 import { landingMedia } from "@/lib/landing/media";
 
 const clinicalBullets = [
-  "Micron-level accuracy",
-  "pH-neutral chemistry",
-  "Controlled environment",
+  "100% mobile setup",
+  "Safe products for daily drivers",
+  "Consistent results every visit",
 ] as const;
 
-const specialists = [
+const serviceDaySteps = [
   {
-    name: "Marcus Vance",
-    role: "Chief specialist",
-    image: aboutPageMedia.teamLead,
-    alt: "Professional portrait of a lead technician with a focused expression.",
-    offset: false,
+    title: "Arrival and walkthrough",
+    body: "We confirm your priorities, inspect the vehicle together, and set clear expectations before work starts.",
   },
   {
-    name: "Elara Chen",
-    role: "Surface chemist",
-    image: aboutPageMedia.teamChemist,
-    alt: "Portrait of a chemical specialist looking confident and professional.",
-    offset: true,
+    title: "Detailing in progress",
+    body: "Exterior and interior work follows a repeatable process with safe products and careful handling of trim, paint, and surfaces.",
   },
   {
-    name: "Julian Ross",
-    role: "Master polisher",
-    image: aboutPageMedia.teamPolisher,
-    alt: "Portrait of a detailing specialist with a clean, professional look.",
-    offset: false,
-  },
-  {
-    name: "Sarah Lund",
-    role: "Quality control",
-    image: aboutPageMedia.teamQC,
-    alt: "Portrait of a quality control lead in a clean work environment.",
-    offset: true,
-  },
-] as const;
-
-const milestones = [
-  {
-    year: "2018",
-    title: "The genesis",
-    body: "Founded with a simple rule: look at the paint before you touch it—and never promise a miracle in an hour.",
-    reverse: false,
-  },
-  {
-    year: "2020",
-    title: "Process 1.0",
-    body: "Dialled in our mobile setup: repeatable wash order, controlled lighting checks, and protectants we trust on daily drivers.",
-    reverse: true,
-  },
-  {
-    year: "2024",
-    title: "San Diego standard",
-    body: "Trusted for boringly consistent finishes—clear communication, same crew on site, and coatings when they actually make sense.",
-    reverse: false,
+    title: "Final check and handoff",
+    body: "You get a quick walkthrough at the end, plus simple maintenance tips so results last longer between visits.",
   },
 ] as const;
 
 export function AboutContent() {
   return (
     <>
-      <section className="relative isolate flex min-h-dvh flex-col justify-end overflow-hidden pt-28 pb-16 md:pb-24">
+      <section className="relative isolate flex min-h-dvh flex-col overflow-hidden">
         <div className="pointer-events-none absolute inset-0 z-0" aria-hidden>
           <picture className="absolute inset-0 block size-full">
             <source
@@ -88,30 +50,31 @@ export function AboutContent() {
           <div className="absolute inset-0 bg-linear-to-t from-slate-950 via-slate-950/65 to-slate-950/20" />
         </div>
 
-        <Container className="relative z-10">
-          <div className="max-w-6xl">
-            <Eyebrow as="p" tone="onDark" className="mb-6 block">
-              About JP Auto Detail
-            </Eyebrow>
-            <h1 className="mb-8 font-clash text-5xl leading-[0.9] font-bold tracking-tighter text-white uppercase sm:text-6xl md:text-7xl lg:text-8xl">
-              Mobile detail
+        <Container className="relative z-10 flex min-h-dvh items-center py-16 md:py-24">
+          <div className="w-full max-w-3xl">
+            <div className="mb-5 flex items-center gap-4 md:mb-6">
+              <span className="h-px w-12 shrink-0 bg-brand" aria-hidden />
+              <Eyebrow as="span" tone="onDark" size="compact" className="block">
+                About JP Auto Detail
+              </Eyebrow>
+            </div>
+            <h1 className="mb-6 font-clash text-[clamp(2.75rem,6vw+1rem,5.5rem)] leading-[0.9] font-bold tracking-tighter text-white uppercase md:mb-8">
+              Who we are
               <br />
               <span className="bg-linear-to-br from-blue-300 to-blue-100 bg-clip-text text-transparent">
-                without the fluff
+                and how we work
               </span>
             </h1>
-            <p className="mb-10 max-w-xl text-base font-medium text-slate-200 leading-relaxed md:text-lg">
-              We&apos;re a San Diego crew that shows up with the van, the water,
-              and the patience to do boring prep right. No fake
-              &quot;laboratory&quot; tour—just careful work on daily drivers and
-              weekend cars alike.
+            <p className="mb-9 max-w-2xl text-sm font-medium text-slate-200 leading-relaxed md:mb-10 md:text-base">
+              We bring professional detailing to your home, apartment, or office
+              with clean process standards and consistent finishes every visit.
             </p>
-            <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
+            <div className="flex flex-wrap items-center gap-4">
               <ButtonLink variant="heroPrimary" href="/services">
                 See packages
               </ButtonLink>
               <ButtonLink variant="heroSecondaryDark" href="/contact">
-                Ask a question
+                Get a quote
               </ButtonLink>
             </div>
           </div>
@@ -125,31 +88,24 @@ export function AboutContent() {
               <div className="relative h-[min(600px,70vh)] w-full overflow-hidden rounded-xl md:h-[600px]">
                 <Image
                   src={aboutPageMedia.clinicalReflection}
-                  alt="Close-up reflection on a coated vehicle in bright, controlled lighting."
+                  alt="Placeholder image representing mobile auto detailing workflow."
                   fill
                   className="object-cover grayscale transition-all duration-700 hover:grayscale-0"
                   sizes="(min-width: 768px) 45vw, 100vw"
                 />
               </div>
-              <div
-                className="absolute -bottom-8 -right-8 hidden bg-brand p-10 md:block"
-                aria-hidden
-              >
-                <Flask className="size-14 text-white" weight="fill" />
-              </div>
             </div>
 
             <div className="flex flex-col gap-8">
               <h2 className="font-clash text-5xl leading-none font-bold tracking-tighter text-foreground uppercase">
-                Clinical
+                Why drivers
                 <br />
-                mastery.
+                choose us.
               </h2>
               <p className="text-lg font-medium text-slate-600 leading-relaxed">
-                Our approach is rooted in chemical precision. Every surface gets
-                a honest read in good light before tools go near it. We treat
-                your vehicle as engineered paint and trim that deserves
-                methodical prep—not a rushed showroom wipe-down.
+                Every appointment is designed around real-life schedules and
+                real-life vehicles. We keep the process simple: show up on time,
+                protect your surfaces, and leave your car cleaner than expected.
               </p>
               <div className="flex flex-col gap-4 pt-2">
                 {clinicalBullets.map((label) => (
@@ -170,10 +126,10 @@ export function AboutContent() {
         <Container>
           <div className="mb-14 md:mb-20">
             <h2 className="font-clash text-5xl font-bold tracking-tighter text-foreground uppercase">
-              The laboratory
+              How we work
             </h2>
             <p className="mt-4 font-sans text-sm font-bold tracking-widest text-slate-500 uppercase">
-              Where science meets aesthetics
+              Reliable service from arrival to final check
             </p>
           </div>
 
@@ -181,7 +137,7 @@ export function AboutContent() {
             <div className="relative min-h-[280px] md:col-span-8 md:min-h-0">
               <Image
                 src={aboutPageMedia.labInterior}
-                alt="Bright detailing space with a vehicle being worked on under clean lighting."
+                alt="Placeholder image for mobile detailing setup."
                 fill
                 className="rounded-xl object-cover"
                 sizes="(min-width: 768px) 58vw, 100vw"
@@ -191,7 +147,7 @@ export function AboutContent() {
               <div className="relative min-h-[200px] overflow-hidden rounded-xl md:min-h-0">
                 <Image
                   src={aboutPageMedia.labBrushes}
-                  alt="Detailing brushes and solutions organized on a tray."
+                  alt="Placeholder image for detailing tools and products."
                   fill
                   className="object-cover"
                   sizes="(min-width: 768px) 30vw, 100vw"
@@ -199,8 +155,8 @@ export function AboutContent() {
               </div>
               <div className="flex flex-col justify-end rounded-xl bg-slate-100 p-8 md:p-10">
                 <p className="font-clash text-xl font-semibold tracking-tight text-foreground leading-tight md:text-2xl md:font-light">
-                  Clean tools, clear steps, and the same order of operations
-                  every visit. That&apos;s the JP Auto Detail standard.
+                  From pre-rinse to final wipe-down, we follow a clear process so
+                  every vehicle gets careful and consistent attention.
                 </p>
               </div>
             </div>
@@ -210,126 +166,84 @@ export function AboutContent() {
 
       <section className="bg-background py-24 md:py-32">
         <Container>
-          <div className="mb-14 flex flex-col items-start justify-between gap-8 md:mb-20 md:flex-row md:items-end">
+          <div className="mb-14 md:mb-20">
             <h2 className="font-clash text-5xl font-bold tracking-tighter text-foreground uppercase">
-              The
-              <br />
-              specialists
+              Meet the owner
             </h2>
-            <p className="max-w-md text-sm font-medium text-slate-600 leading-relaxed md:text-base">
-              Our technicians are more than detailers—they&apos;re craftspeople
-              who care about safe chemistry, even lighting, and finishes that
-              hold up after the driveway photos.
+            <p className="mt-4 max-w-2xl text-sm font-medium text-slate-600 leading-relaxed md:text-base">
+              JP Auto Detail is owner-operated, and every appointment is handled
+              with the same care and consistency. You work directly with the
+              person doing the job, so communication stays clear from quote to
+              final walkthrough.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 sm:gap-4 lg:grid-cols-4">
-            {specialists.map(({ name, role, image, alt, offset }) => (
-              <div
-                key={name}
-                className={offset ? "mt-12 md:mt-0" : undefined}
-              >
-                <div className="group relative overflow-hidden rounded-xl bg-slate-200">
-                  <div className="relative aspect-3/4 overflow-hidden">
-                    <Image
-                      src={image}
-                      alt={alt}
-                      fill
-                      className="object-cover grayscale transition-transform duration-500 group-hover:scale-105 group-hover:grayscale-0"
-                      sizes="(min-width: 1024px) 22vw, (min-width: 640px) 45vw, 100vw"
-                    />
-                  </div>
-                </div>
-                <div className="mt-6">
-                  <h3 className="font-clash text-lg font-bold tracking-tight text-foreground uppercase">
-                    {name}
-                  </h3>
-                  <p className="mt-1 font-sans text-sm font-bold tracking-widest text-brand uppercase">
-                    {role}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </Container>
-      </section>
-
-      <section className="bg-slate-950 py-24 text-white md:py-32">
-        <Container>
-          <div className="max-w-4xl">
-            <h2 className="mb-14 font-clash text-5xl font-bold tracking-tighter uppercase md:mb-20">
-              Our evolution
-            </h2>
-            <div className="relative space-y-20 md:space-y-24">
-              <div
-                className="absolute top-0 bottom-0 left-4 ml-0 w-px bg-white/10 md:left-1/2 md:-translate-x-1/2"
-                aria-hidden
+          <div className="grid grid-cols-1 gap-8 md:grid-cols-12 md:gap-10">
+            <div className="relative min-h-[360px] overflow-hidden rounded-xl bg-slate-200 md:col-span-5">
+              <Image
+                src={aboutPageMedia.teamLead}
+                alt="Placeholder image representing the business owner."
+                fill
+                className="object-cover"
+                sizes="(min-width: 768px) 38vw, 100vw"
               />
-
-              {milestones.map(({ year, title, body, reverse }) => (
-                <div
-                  key={year}
-                  className={`relative flex flex-col items-start md:flex-row md:items-center md:justify-between ${
-                    reverse ? "md:flex-row-reverse" : ""
-                  }`}
-                >
+            </div>
+            <div className="md:col-span-7">
+              <h3 className="font-clash text-3xl font-bold tracking-tight text-foreground uppercase md:text-4xl">
+                What to expect on service day
+              </h3>
+              <div className="mt-8 space-y-6">
+                {serviceDaySteps.map(({ title, body }, index) => (
                   <div
-                    className={`mb-6 hidden w-[45%] md:mb-0 md:block ${
-                      reverse ? "text-left" : "text-right"
-                    }`}
+                    key={title}
+                    className="rounded-xl border border-slate-200 bg-white p-6"
                   >
-                    <span className="font-clash text-5xl leading-none font-bold tracking-tighter text-white/20 md:text-6xl">
-                      {year}
-                    </span>
-                  </div>
-                  <div
-                    className="absolute top-1/2 left-4 z-10 size-3 -translate-x-1/2 -translate-y-1/2 rounded-full bg-brand md:left-1/2"
-                    aria-hidden
-                  />
-                  <div
-                    className={`w-full pl-10 md:w-[45%] md:pl-0 ${
-                      reverse ? "md:text-right" : ""
-                    }`}
-                  >
-                    <span className="mb-2 block font-sans text-xl font-bold md:hidden">
-                      {year}
-                    </span>
-                    <h3 className="mb-3 font-clash text-xl font-bold tracking-tight uppercase md:text-2xl">
+                    <p className="font-sans text-xs font-bold tracking-[0.2em] text-brand uppercase">
+                      Step {index + 1}
+                    </p>
+                    <h4 className="mt-3 font-clash text-xl font-semibold tracking-tight text-foreground uppercase">
                       {title}
-                    </h3>
-                    <p className="text-sm font-medium text-white/60 leading-relaxed md:text-base md:font-light">
+                    </h4>
+                    <p className="mt-3 text-sm font-medium text-slate-600 leading-relaxed md:text-base">
                       {body}
                     </p>
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
           </div>
         </Container>
       </section>
 
-      <section className="relative isolate min-h-[560px] overflow-hidden md:h-[min(819px,90vh)]">
-        <Image
-          src={aboutPageMedia.ctaHeadlight}
-          alt="Headlight with water beading on a ceramic-coated surface in dramatic light."
-          fill
-          className="object-cover"
-          sizes="100vw"
+      <section className="relative isolate w-full overflow-hidden bg-slate-950 py-24 md:py-32">
+        <div
+          className="pointer-events-none absolute inset-0 -z-10 bg-linear-to-br from-brand/30 via-blue-500/15 to-slate-950"
+          aria-hidden
         />
-        <div className="absolute inset-0 flex flex-col items-center justify-center bg-slate-950/50 p-8 text-center backdrop-blur-sm">
-          <h2 className="max-w-4xl font-clash text-5xl leading-[0.9] font-bold tracking-tighter text-white uppercase sm:text-6xl md:text-7xl lg:text-8xl">
-            Experience
-            <br />
-            precision
-          </h2>
-          <ButtonLink
-            variant="heroPrimary"
-            href="/contact"
-            className="mt-10 bg-white text-foreground hover:scale-100 hover:bg-brand hover:text-on-brand md:mt-12"
-          >
-            Reserve your appointment
-          </ButtonLink>
-        </div>
+        <div
+          className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(circle_at_20%_20%,rgba(59,130,246,0.35),transparent_45%),radial-gradient(circle_at_80%_80%,rgba(37,99,235,0.25),transparent_40%)]"
+          aria-hidden
+        />
+        <Container>
+          <div className="mx-auto flex max-w-4xl flex-col items-center text-center">
+            <Eyebrow as="p" tone="onDark" className="mb-5 block">
+              Mobile Auto Detailing
+            </Eyebrow>
+            <h2 className="font-clash text-5xl leading-[0.9] font-bold tracking-tighter text-white uppercase sm:text-6xl md:text-7xl">
+              Ready for
+              <br />
+              your next detail
+            </h2>
+            <p className="mt-6 max-w-2xl text-sm font-medium text-white/75 leading-relaxed md:text-base">
+              Book a mobile appointment that fits your schedule. Home,
+              apartment, or office - we bring everything needed to get the job
+              done right.
+            </p>
+            <ButtonLink variant="heroPrimary" href="/contact" className="mt-10">
+              Book mobile service
+            </ButtonLink>
+          </div>
+        </Container>
       </section>
     </>
   );

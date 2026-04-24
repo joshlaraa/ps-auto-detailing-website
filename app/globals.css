@@ -51,14 +51,6 @@ button:not(:disabled),
   cursor: pointer;
 }
 
-.blue-gradient {
-  background-image: var(--background-image-brand-gradient);
-}
-
-.no-scrollbar::-webkit-scrollbar {
-  display: none;
-}
-
 @keyframes marquee {
   0% {
     transform: translateX(0);
@@ -71,11 +63,8 @@ button:not(:disabled),
 .animate-marquee {
   display: flex;
   width: fit-content;
+  will-change: transform;
   animation: marquee var(--duration-marquee) linear infinite;
-}
-
-.animate-marquee:hover {
-  animation-play-state: paused;
 }
 
 /* Respect reduced-motion preferences for continuously moving UI. */

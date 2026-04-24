@@ -1,27 +1,33 @@
-/** Extra imagery for the about page (hero uses `landingMedia` like the home page). */
-export const aboutMedia = {
-  labWide:
-    "https://lh3.googleusercontent.com/aida-public/AB6AXuDH4lafZcwLXeWNlNM98UGrKClIKVbHPutZtN3WfUdWofuOAR_3eoVWVHLZlWZmFCAI2X574I60S6xVFl0LfdrowBScoFpxrgBYVfVkqNSYKp7dJN5hLdFBbNo3QpeOTFUlnRNxQXPiybjHO6chbtfo0y8azwxx50atSLW2SIihXkb11XkS4fgH0zzy_howsEbqg2Cqe58T48jZWY2jJsVk4UuPIjW4rwhSrVwEbFBB4Y7oSuscmUz1I_xZRgpPOIhaERdRSL0Ad7o",
-  labFoam:
-    "https://lh3.googleusercontent.com/aida-public/AB6AXuCMNjcKHrN5Eli5OpWq5xF4_uTPy7V9wtdimm8uyergi8I2FshRAmJEFqUEZMP6gH__tYJ20kHKSqf9lkPDX7TyLUgZtzhr4IOJ7ex7YbJVwULVLGzTvECnRRBtXLkUnqBufCGVksoPfUYkqNvxhyvc627M6mRPrLxOC3MqbO7GIdWeMNHhv_-ogIJyl9CnC6whrglXhA5uaBnpQfdSIkAZwShj9ftdoFsyi53X4b2aONzFQOuGdAMFENaD6UwbhrtTuUosopjrjtk",
-} as const;
+/** Placeholder imagery for About page sections while final photos are prepared. */
+const createPlaceholder = (label: string, start: string, end: string) =>
+  `data:image/svg+xml;utf8,${encodeURIComponent(
+    `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" role="img" aria-label="${label}">
+      <defs>
+        <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="${start}" />
+          <stop offset="100%" stop-color="${end}" />
+        </linearGradient>
+      </defs>
+      <rect width="1600" height="1000" fill="url(#bg)" />
+      <rect x="140" y="140" width="1320" height="720" rx="26" fill="rgba(15,23,42,0.15)" stroke="rgba(255,255,255,0.3)" stroke-width="4" />
+      <circle cx="800" cy="455" r="84" fill="rgba(255,255,255,0.2)" />
+      <path d="M760 455h80M800 415v80" stroke="white" stroke-width="12" stroke-linecap="round" />
+      <text x="800" y="680" fill="white" text-anchor="middle" font-family="Arial, sans-serif" font-size="56" font-weight="700">${label}</text>
+      <text x="800" y="750" fill="rgba(255,255,255,0.9)" text-anchor="middle" font-family="Arial, sans-serif" font-size="28">Placeholder image</text>
+    </svg>`,
+  )}`;
 
-/** Bento, team, timeline, and CTA imagery for the about page story sections. */
 export const aboutPageMedia = {
-  clinicalReflection:
-    "https://lh3.googleusercontent.com/aida-public/AB6AXuCbI-OYxEnXgl_YzUSpT7Dx68lZpYELwFyi4ZpFAnIsGemDMWWamp5MvdmFRUtsW3Wy10TM6aHR9E-tM7VZNVEJkX2xhxyGb9tPYq7TPQz_rH-xYS3wSHzHSxau5YfmOvhmQG5-hVG3t5ATabaErIYG9jDRgjBW7XJeXxzVWsDcLd7vFZZs2J4bxBPr3QxK0jRoXDat6HylzqoHXreJLIsLg9WIzNEeG6ZZvKiToz9Dnb1OyyCaPBy9a2X89Qe5Y-ibqWGJZdBHwnA",
-  labInterior:
-    "https://lh3.googleusercontent.com/aida-public/AB6AXuDU6sYdHQ2La-HOEBboDYdcWhYHrIKPHNwxi9L230ZgVAG11QIMB8WiixZ5PRnThYTx61Xm5S3TF6r81QsRSPZDqdEAJe0mlGfCnzE3z_gI74w7OSaYM9NbV0srzU_Y5lMAIzyvTeavUCfLkxtF6TCQnZB8zDQ39tzUcbLvg0UyWYjKNrBx_Gy3XlspzuaGhLeeozLwLdbKJ571yZlPQ2FaBa1q-ETM9r4uoGXWPS2faF_06hn-wOC4d9bFUMy5WTob46SpaukSR_E",
-  labBrushes:
-    "https://lh3.googleusercontent.com/aida-public/AB6AXuDyJIAAifsKHTjyXP36Pn3gmoRDXz0zk0KJXeOXzuYT85YkWa01rOn_qFBNLMZMcZrH2c-YjYY9jyMX-483QXOAIv79iyA4mYJeXcRcxkzAkQ3pp34qhWS-NW04PkLUtSbml8LALk4TEPS-1tdfIgsRFMJ6Od0Fb1H_QF6nmoN7nmDSNp47q2oZWMhQblO3OOJi-DiwexnZYvHi0kpzCsCwuAAR8ft6w4OX8ma6NCpnTLFBE8FCFW0Mo5KQmthR3dJGmhnMR43Ijn0",
-  teamLead:
-    "https://lh3.googleusercontent.com/aida-public/AB6AXuDy7vc94HUVBd4VMxahcY0f7r0k_ovDyPG1iQhHexxCeDuRGQwnxLbklq4VPjKC-dYpeI6b6nSPxRnb9OxC9bPPehVr3zxy2NnSQReelmRL5DVlhMwemnJ2QojGJDD0vhLt_ln2ugm2m6ASgihRnZAqA1Ecb0q11r6bgfmEe7C5AEeEGc6hXQJVjbnSEa4QJT5Ij07Kiy3o0fNlziNpywjgdnkr01QoDWLK_X6Y542psH1i1vmOF1M2nTgVCLKWBgvxBRcmeKW-vZk",
-  teamChemist:
-    "https://lh3.googleusercontent.com/aida-public/AB6AXuAJCkOlf5RyJHpIuNek6S2U5MZQwTAwahLr-a67G2rnLlO-OisOi_bENAdeNvQvt7o4hjzkwg5aZ9ncjcTv84EVEb_-2VbEBi6N3NVObjIe8qEnGdN5jP8CTwoAweNnCSXhng_Zv5sYXfRithUKkz0c3MtHyFR9fgehXQKvsyQ4gklAzVsATBez7JrclwA6m4n9cRyQS4Di1Y8_oi23JgJCbSwyM2k9MCbo8lX3poEomFXw2VWNVF4VBBsGd11IHQQ4kKrW5fUmrKA",
-  teamPolisher:
-    "https://lh3.googleusercontent.com/aida-public/AB6AXuDaLNNzJdN5mZbQVwybWchECKd5ltjqmshY-Z0LzxntyuugvdqY10uY9-Vgh2z1V5eF8ms2qSDaK4woHy_HoyK8PtpSM6WIMg9CSdChNqFM7sdAyI9oNiaxiei1_rMGZrWgi0q3akbbmgaxvDGlGOH5JDm3lLxkzJxr2N2B_26p_Z39yYuV9a7YjNShhdYsmiPjBB2H1aBTaLNZLyi-Hl0o7GsMYagv-a1P1161eBZMIPRN11qnk9Y1uuMBaLC23Eh0aeLLQH0G5R8",
-  teamQC:
-    "https://lh3.googleusercontent.com/aida-public/AB6AXuAgOuAWr2PlPCLV5gsvXCLRdYlfC0DslLDQdche1UiI3D0STua9BfHR8pZ_lbnKVS_lXOqk4Su2PPyx3gPGpGV2l3QMG4-oDiiWice0b03ONA7-fjoyMpYxjUZaAGZtFGLByAWUzIsCLXPmcxFqSzeVhMzkCB8aphV0LalhbxxsMhtjb-MPVKEHGm1bLsWOpX5_VzkeDKrTH7wNszFJ7WmdY7TA38p1PZZwQSwiXWO3UCH0P2i8doXGzCNoHubDvOcg089oKobwwBw",
-  ctaHeadlight:
-    "https://lh3.googleusercontent.com/aida-public/AB6AXuBDGcXQUxT6dT8vP7PTKWyUjHRAbC43z8Cy41MrGMkmEroD4pjSqYGhjX2Ywn0Fky7HwvPLyvd2CduDHlnpXqRWszhsnL7mD53jrokc_vWfkepzNkZADm4ltkutsiQyjCjachIdUq4c7jrfvI2H8RHL0KXAcu6TGBGqeiAAqxXlXRIMR-WlvnSXM7nGUANTQv9qB-hHMbrMlgBuTrA_AGhG6hhxW2Aj02RJIgyFZCTVbYXzEJ1NulO8uBJ2FIP2Mcoffdnl-P7WArw",
+  clinicalReflection: createPlaceholder(
+    "Mobile Wash Process",
+    "#0f172a",
+    "#1d4ed8",
+  ),
+  labInterior: createPlaceholder("Detail Setup Scene", "#1f2937", "#2563eb"),
+  labBrushes: createPlaceholder("Tools And Products", "#334155", "#3b82f6"),
+  teamLead: createPlaceholder("Team Member 1", "#1e293b", "#0ea5e9"),
+  teamChemist: createPlaceholder("Team Member 2", "#1e293b", "#0284c7"),
+  teamPolisher: createPlaceholder("Team Member 3", "#1e293b", "#0369a1"),
+  teamQC: createPlaceholder("Team Member 4", "#1e293b", "#075985"),
+  ctaHeadlight: createPlaceholder("Book Mobile Detail", "#0f172a", "#1d4ed8"),
 } as const;

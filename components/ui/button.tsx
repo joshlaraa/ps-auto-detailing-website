@@ -26,14 +26,6 @@ export const buttonStyles = {
     focusRing,
     disabledStates,
   ),
-  heroSecondary: cn(
-    "inline-flex items-center justify-center border border-brand/20",
-    ctaPad,
-    ctaLabel,
-    "text-brand transition-colors hover:bg-brand/5",
-    focusRing,
-    disabledStates,
-  ),
   heroSecondaryDark: cn(
     "inline-flex items-center justify-center border border-white/35",
     ctaPad,

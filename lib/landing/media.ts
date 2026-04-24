@@ -1,13 +1,28 @@
+/** Placeholder imagery used for landing page service tiles. */
+const createPlaceholder = (label: string, start: string, end: string) =>
+  `data:image/svg+xml;utf8,${encodeURIComponent(
+    `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 1400" role="img" aria-label="${label}">
+      <defs>
+        <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="${start}" />
+          <stop offset="100%" stop-color="${end}" />
+        </linearGradient>
+      </defs>
+      <rect width="1400" height="1400" fill="url(#bg)" />
+      <rect x="120" y="120" width="1160" height="1160" rx="24" fill="rgba(15,23,42,0.16)" stroke="rgba(255,255,255,0.32)" stroke-width="4" />
+      <circle cx="700" cy="700" r="92" fill="rgba(255,255,255,0.2)" />
+      <path d="M650 700h100M700 650v100" stroke="white" stroke-width="12" stroke-linecap="round" />
+    </svg>`,
+  )}`;
+
 export const landingMedia = {
   heroCar: "/jp_auto_detail_hero.png",
   heroCarMobile: "/jp_auto_detail_hero_mobile.png",
-  sectionWheels: "jp_auto_detail_section_wheels.png",
+  sectionWheels: "/jp_auto_detail_section_wheels.png",
   sectionClaybar: "/jp_auto_detail_section_claybar.png",
   sectionClaybarMobile: "/jp_auto_detail_section_claybar_mobile.png",
   processWater:
     "https://lh3.googleusercontent.com/aida-public/AB6AXuBNONwLwQi-um5oMQITC9cIA1WcAIvJsKZVHq5XLQGehgGQEhXdiw8dIyo-ZyvQKuin0OyFJsFtqLgRa7_X7vLTHe5vml1G37xAfyVYvmsPyAt45nvcVt81knS0st90i5-1GYslgmrS3fhFHAELppa4u2UqZUGChyxzJklDCKAapv5dkpiXwVmeiH3NMwQhLYOBYXeNSgpAIefOmGFXPj9JOAlP0cOFdW5I4nBEVcT8rfsfx861VjyryZWCx3VglKrEN7LBH9tjMBc",
-  anatomyInterior:
-    "https://lh3.googleusercontent.com/aida-public/AB6AXuB14dsYv30zO1PV3dBhvamTCVxVmE2SLNlXciKgtAml27h1gdhEl73ZQT9FxDzNn9MbSGlyMpdI2q1zu5netoN6pQLLR2CJuVqwOOfqDu_Db7byfJtvsAKRUvb9a6QbdegPoLKgDQ55Jqdv2POkKuufPzeMGRNDek_jAgEZDCz8kCAc-ZOS-1mU0LeTV0srbudslFbN_Ac6gXoQMfLgi8RXXo4xWsl_Jvu3f1wRfmtpIARYI047G0x1jN9R3B2qB7RSCho-PMU1dMo",
   anatomySdCounty: "/jp_auto_detail_section_sd.png",
   anatomySdCountyMobile: "/jp_auto_detail_section_sd_mobile.png",
   anatomyCoastal: "/jp_auto_detail_section_coastal.png",
@@ -23,16 +38,15 @@ export const landingMedia = {
   galleryAfter:
     "https://lh3.googleusercontent.com/aida-public/AB6AXuC5V-SbgDErK-PgW7I38jOkkLuHxEwtKunELu0xHCpFROPY8o9RJEn2wnuNj89hS9eVz21F1gb-EgcFtSrO9B6SBZwtO1vR07XtmaW-hv2-Pbzhak29lSbMtt6SHUqA4oM-_Jyws4jhAZG-wMIMY0gNxonUsFr42axLFJGiqP2CpEjjJcucUnwvyMg5jIV1GJuvbrdgagV05pHRBvJm-s4WhChGrr_upnjFTSoyC8P7DKXfYs48nEeW4ORiiBkzrxn3qNXOORCHsMw",
   /** Home page services grid tiles */
-  homeServiceCeramic:
-    "https://lh3.googleusercontent.com/aida-public/AB6AXuC6IRszi_idb5pdU3ZsUOaz43VSK_9IDc1a0152Uhu0TNMllijx4UtrhpYT94Gq4O7Moa7sWYtMUu0HQLby02ihVULg-0r7I-nh54qklu_B0EBMnx4PU7xTid36M5An4o3g84rQcJ5DdJ2uSaHsmNb-bPSRlHXcBpd1AhVCTmpgtGDZk_7929tRAD1FwUPHQoUBbRlNhF4q2zfSrbzyOe2uj6HX7XnUk-r_fPqkwYLVKUzhiyCblfdYEob-Ff9md7qNnTUqWyS6OvQ",
-  homeServicePaint:
-    "https://lh3.googleusercontent.com/aida-public/AB6AXuAwBM9b3mmSjFVtFGhouymMtl4fewArQx4HFh3OWle92IBqEsHqtT2swwTv3SPUnJwwxAnHO_Xtg8iwI5dSjiphFLQ9TgXX7R9Uc6D2dpEbpBKCSmt30S5ZU0Eh4YNCD5Ote-likiKYX7GfSs-MPJ-zmOoe3wJGL-nih2UunuynTbaHf-I-VYVtsbOOFC_Stk4-cQ_K221ad3CcaJ20LBcmsUyeeN7Uz6wS7VEcyssGY_HSlPyRzhdQFnOdcWp2p8RRlphoj1VYa7A",
-  homeServiceInterior:
-    "https://lh3.googleusercontent.com/aida-public/AB6AXuA8wEewrY3I9RfiVQUB1MuNRG9Pv9TwFWocdXRaELGqbak9W9yNqU65NNbOxVtLyaz1E-_aeCN3NxCjueAjeJEoXc9jKuFAe9pErb1qAq6JfQjIZvICTgMKaZgw_TOA2OjqR1xTYZgH_RWxTXLhV0mRaCcd3eaBZ7NPDqt0XaqPZAAxDl7gW6iq_r9oqsqun7aTtmPszHUypKG1yDS3NK6CuRpMmGKjsjzil6MT4bdUEJ4IGTGaPyFrNaI9Iz_rLHI_jkBxoeUSyGc",
-  homeServiceExterior:
-    "https://lh3.googleusercontent.com/aida-public/AB6AXuBo2rtQ_aKHTPq-8C43O2amH4AfjeA1t5V1U0UD3nUDI1kW_gFI-O_btSV59dpZ4kBntZpiAlCDyfgC1NfG3HOolplpStBMb6iIpvTjst4DdJKjtawBssbH9NvodQyeFORui3chwTOkocfFXx4b7SBJIkigha9fdFrMj-v22xU8CAyRFgPV30bg7FeH7KapKhSqnQ3PmDygCdwcmDLjO8LFcdx-S5NZzP7dBWEhHBsgQWQs0Wqarz2V8RHfRypyz_iMH_XxTh7Y-Ro",
-  homeServiceMaintenance:
-    "https://lh3.googleusercontent.com/aida-public/AB6AXuB8eMZf9f4P-47VsT5do9T7Kg68OFB0KgfYgc759BqlVjcpKJQuJIVNEQMHpjcr39VGVum6U1bGN66vESwf-ZiYxBmyAD53k0LrCLgnvtWB7EyvxkkHhI1FYbto__dTE-ex4W_serJE8noK9IY7ndfQuUDdGZKTIPr_xIh6Y3Fx-euG8zlFVohQt6-8PSM5WFpalcTaq4TtxE-dyvhTWOCpfN5DNxK_tRC1_AmXzd3hL0KvFnjDhtyquVFyacJHtm6xfjIMJKkn5Kw",
+  homeServiceCeramic: createPlaceholder("Ceramic Coating", "#172554", "#2563eb"),
+  homeServicePaint: createPlaceholder("Paint Correction", "#1f2937", "#1d4ed8"),
+  homeServiceInterior: createPlaceholder("Interior Detailing", "#0f172a", "#0369a1"),
+  homeServiceExterior: createPlaceholder("Exterior Detailing", "#1e293b", "#3b82f6"),
+  homeServiceMaintenance: createPlaceholder(
+    "Maintenance Detail",
+    "#0f172a",
+    "#1e40af",
+  ),
   homeServiceBook:
     "https://lh3.googleusercontent.com/aida-public/AB6AXuCpGQASNBL7rrElp6-TKQ7deghKCxfmX70Cicf9XbmL1eSwGUOMj7IzqNslhIabhkN9NP-eBqOBmbJ-Flx4BIm7L958nL5a4NBH0Fjcm__3j3Sb2uPiASFTJ8cMS4-pfu7YLFoahYz7w3q5eQYzxyDEF46-n_79vOxrP61u__TaiBW-mKEwH2dABVu1HGLqfxm-Uc_2FFWfILF4cve97J4tRSQaWgswSfLftBVpG1MQM_8F1Ug3mkfFTGlx4Zvfk1IZtWRQvL48QPY",
 } as const;

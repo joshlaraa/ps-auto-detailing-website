@@ -134,7 +134,12 @@ export function HomeServicesShowcase() {
                 <p className="mb-6 font-sans text-xs font-bold tracking-widest text-white/80 uppercase">
                   Real-time availability
                 </p>
-                <span className={buttonStyles.heroPrimary + " bg-white text-brand group-hover:bg-slate-100 hover:scale-100"}>
+                <span
+                  className={
+                    buttonStyles.heroPrimary +
+                    " !bg-white !text-brand shadow-lg shadow-black/20 group-hover:!bg-slate-100 hover:scale-100"
+                  }
+                >
                   Select slot
                 </span>
               </div>

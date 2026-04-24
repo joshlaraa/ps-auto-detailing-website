@@ -3,7 +3,6 @@ export { BookingCta } from "./booking-cta";
 export { GallerySection } from "./gallery-section";
 export { HeroSection } from "./hero-section";
 export { PricingSection } from "./pricing-section";
-export { ProcessSection } from "./process-section";
 export { ServicesSection } from "./services-section";
 export { SiteFooter } from "./site-footer";
 export { TestimonialsSection } from "./testimonials-section";
